@@ -1,0 +1,5 @@
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\DataClasses\bin\Debug\DataClasses.dll
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\DataClasses\bin\Debug\DataClasses.pdb
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\DataClasses\obj\Debug\DataClasses.csprojResolveAssemblyReference.cache
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\DataClasses\obj\Debug\DataClasses.dll
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\DataClasses\obj\Debug\DataClasses.pdb

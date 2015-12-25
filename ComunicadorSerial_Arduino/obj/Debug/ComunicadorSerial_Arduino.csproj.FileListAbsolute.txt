@@ -1,0 +1,40 @@
+c:\users\masso\documents\visual studio 2015\Projects\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe.config
+c:\users\masso\documents\visual studio 2015\Projects\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe
+c:\users\masso\documents\visual studio 2015\Projects\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.pdb
+c:\users\masso\documents\visual studio 2015\Projects\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csprojResolveAssemblyReference.cache
+c:\users\masso\documents\visual studio 2015\Projects\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.Form1.resources
+c:\users\masso\documents\visual studio 2015\Projects\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.Properties.Resources.resources
+c:\users\masso\documents\visual studio 2015\Projects\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csproj.GenerateResource.Cache
+c:\users\masso\documents\visual studio 2015\Projects\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
+c:\users\masso\documents\visual studio 2015\Projects\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe.config
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\GraficDisplay.exe
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\GraphLib.dll
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\GraficDisplay.pdb
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\GraphLib.pdb
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csprojResolveAssemblyReference.cache
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.Form1.resources
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.Properties.Resources.resources
+C:\Users\masso\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csproj.GenerateResource.Cache
+C:\Users\Sergio\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe.config
+C:\Users\Sergio\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\Sergio\Dropbox\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\masso\OneDrive\Backup\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe.config
+C:\Users\masso\OneDrive\Backup\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\masso\OneDrive\Backup\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\masso\OneDrive\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe.config
+C:\Users\masso\OneDrive\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\masso\OneDrive\UFABC\Quad 2.2015\Instrumentacao\ProjetoFinal\ComunicadorSerial_Arduino\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe.config
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csprojResolveAssemblyReference.cache
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.USBConnectInterface.resources
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.Properties.Resources.resources
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csproj.GenerateResource.Cache
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\masso\OneDrive\UFABC\Quad 3.2015\Analise de Sinais Biomédicos\Projeto Final\MyoAnalyzer\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
