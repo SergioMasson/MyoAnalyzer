@@ -42,6 +42,7 @@ namespace MyoAnalyzer
         private KernelSupportVectorMachine SVM;
 
         public bool[] ChannalsToTrain { get; set; }
+        private bool IsClassificatorTrained;
 
         //Arduino
         private USBConnectInterface _connectClick;
@@ -62,6 +63,8 @@ namespace MyoAnalyzer
             Channel6CheckBox.DataContext = this;
             Channel7CheckBox.DataContext = this;
             Channel8CheckBox.DataContext = this;
+
+            IsClassificatorTrained = false;
 
             Pose1RawData = new List<EmgTrainData>();
             Pose2RawData = new List<EmgTrainData>();
@@ -312,6 +315,8 @@ namespace MyoAnalyzer
 
             ScatterplotBox.Show("Expected results", DataTraining, totalOutput);
             ScatterplotBox.Show("GaussianSVM results", DataTraining, answers);
+
+            IsClassificatorTrained = true;
         }
 
         private void USB_Connect_Click(object sender, RoutedEventArgs e)
@@ -321,13 +326,69 @@ namespace MyoAnalyzer
             _connectClick.Show();
         }
 
-        private void Live_Click(object sender, RoutedEventArgs e)
+        private void TestClassification_Click(object sender, RoutedEventArgs e)
         {
+
+            if (_hub.Myos.Count == 0)
+            {
+                DisplayText.AppendText("\n No Myo device found! please connect one and try again.");
+                return;
+            }
+
+            if (!IsClassificatorTrained)
+            {
+                DisplayText.AppendText("\n You need to train you classificator first in order to do live!");
+                return;
+            }
+
+            this.TestClassificationButton.Content = State == AppState.Waiting ? "Start Test" : " Finish ";
+
+            if (State != AppState.Acquiring)
+            {
+                State = AppState.Acquiring;
+                _dataColected = new List<int[]>();
+                return;
+            }
+
+            State = AppState.Waiting;
+
             var data = ExtractFeatures(_dataColected);
 
             int[] answers = data.Apply(SVM.Compute).Apply(System.Math.Sign);
 
-            _connectClick.SendDataToUsb(answers[0] == -1 ? "1" : "3");
+            PlotTestDataButton.Visibility = Visibility.Visible;
+
+            try
+            {
+                _connectClick.SendDataToUsb(answers[0] == -1 ? "1" : "3");
+            }
+            catch (Exception)
+            {
+                DisplayText.AppendText("\n No USB device detected! But the result was: " + answers[0].ToString()); ;
+            }
+            
+
+        }
+
+        private void PlotTest_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GoLive_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (_hub.Myos.Count == 0)
+            {
+                DisplayText.AppendText("\n No Myo device found! please connect one and try again.");
+                return;
+            }
+
+            if (!IsClassificatorTrained)
+            {
+                DisplayText.AppendText("\n You need to train you classificator first in order to do live!");
+                return;
+            }
         }
 
         #endregion ButtonClicks
@@ -431,6 +492,7 @@ namespace MyoAnalyzer
                     break;
             }
         }
-        
+
+       
     }
 }

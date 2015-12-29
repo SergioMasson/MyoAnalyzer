@@ -5,6 +5,7 @@
         Started,
         Waiting,
         Acquiring,
+        Live,
     }
 
     public enum TrainMethods

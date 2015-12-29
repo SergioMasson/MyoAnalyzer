@@ -162,14 +162,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="89056">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="89568">
       <assemblyIdentity name="MyoAnalyzer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>u7pqetoLQx2n3M2hutOFTzw4PBkOAjIZ6irWF29ur/M=</dsig:DigestValue>
+        <dsig:DigestValue>uwcMoxtqw2441Wcudt553i6F7iNLEzVDBJeaqcKwxaI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -193,7 +193,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QBR+k+482kOveDPmKe8YPLi2xZ9NpED3zHxcc5sTsLw=</dsig:DigestValue>
+        <dsig:DigestValue>N3MIA92xggV5y81L1YbE0uv80HI6/2S63QEN8c6OsE4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
