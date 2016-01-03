@@ -120,3 +120,7 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer\MyoAnalyzer\obj\Debug\MyoAnalyzer.Pro
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer\MyoAnalyzer\obj\Debug\MyoAnalyzer.csproj.GenerateResource.Cache
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer\MyoAnalyzer\obj\Debug\MyoAnalyzer.exe.manifest
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer\MyoAnalyzer\obj\Debug\MyoAnalyzer.application
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\MyoAnalyzer.exe.config
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.csproj.ResolveComReference.cache
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.exe
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.pdb
