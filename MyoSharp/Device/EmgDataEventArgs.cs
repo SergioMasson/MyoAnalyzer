@@ -20,8 +20,7 @@ namespace MyoSharp.Device
         /// <exception cref="System.ArgumentNullException">
         /// The exception that is thrown when <paramref name="myo"/> or <paramref name="emgData"/> is null.
         /// </exception>
-        public EmgDataEventArgs(IMyo myo, DateTime timestamp, IEmgData emgData)
-            : base(myo, timestamp)
+        public EmgDataEventArgs(IMyo myo, DateTime timestamp, IEmgData emgData) : base(myo, timestamp)
         {
             Contract.Requires<ArgumentNullException>(myo != null, "myo");
             Contract.Requires<ArgumentNullException>(emgData != null, "emgData");

@@ -1,9 +1,4 @@
-﻿using Accord.Controls;
-using Accord.MachineLearning.VectorMachines;
-using Accord.MachineLearning.VectorMachines.Learning;
-using Accord.Math;
-using Accord.Statistics.Kernels;
-using ComunicadorSerial_Arduino;
+﻿using ComunicadorSerial_Arduino;
 using DataClasses;
 using MyoSharp.Communication;
 using MyoSharp.Device;
@@ -39,15 +34,13 @@ namespace MyoAnalyzer
         // Machi learning variables
         private double[][] DataTraining;
 
-        private KernelSupportVectorMachine SVM;
-
-        public bool[] ChannalsToTrain { get; set; }
-        private bool IsClassificatorTrained;
+        // Class to perform the trainning
+        private ITrainner Trainner;
 
         //Arduino
         private USBConnectInterface _connectClick;
 
-        private int trials = 0;
+        public bool[] ChannalsToTrain { get; set; }
 
         public MainWindow()
         {
@@ -63,8 +56,6 @@ namespace MyoAnalyzer
             Channel6CheckBox.DataContext = this;
             Channel7CheckBox.DataContext = this;
             Channel8CheckBox.DataContext = this;
-
-            IsClassificatorTrained = false;
 
             Pose1RawData = new List<EmgTrainData>();
             Pose2RawData = new List<EmgTrainData>();
@@ -155,6 +146,8 @@ namespace MyoAnalyzer
             State = AppState.Acquiring;
             StartTime = DateTime.UtcNow;
             _dataColected = new List<int[]>();
+            ErroMassege erro = new ErroMassege("You are now recording Emg Data from Myo");
+            erro.Show();
             DisplayText.AppendText("\n You are now recording Emg Data from Myo");
             DisplayText.ScrollToEnd();
             GetDataButton.Content = "Stop Acquiring";
@@ -280,43 +273,10 @@ namespace MyoAnalyzer
 
         private void TrainButton_Click(object sender, RoutedEventArgs e)
         {
-            DataTraining = ExtractFeatures(Pose1RawData, Pose2RawData);
 
-            IEnumerable<int> outputs1 = Enumerable.Repeat(-1, Pose1RawData.Count);
-            IEnumerable<int> outputs2 = Enumerable.Repeat(1, Pose2RawData.Count);
+            Trainner = new KSVMTrainner();
 
-            int[] totalOutput = outputs1.Concat(outputs2).ToArray<int>();
-
-            // Estimate the kernel from the data
-            var gaussian = Gaussian.Estimate(DataTraining);
-
-            // Create a Gaussian binary support machine with 2 inputs
-            SVM = new KernelSupportVectorMachine(gaussian, ChannalsToTrain.Count(a => a));
-
-            // Create a new Sequential Minimal Optimization (SMO) learning
-            // algorithm and estimate the complexity parameter C from data
-            var teacher = new SequentialMinimalOptimization(SVM, DataTraining, totalOutput)
-            {
-                UseComplexityHeuristic = true
-            };
-
-            // Teach the vector machine
-            double error = teacher.Run();
-
-            // Classify the samples using the model
-            int[] answers = DataTraining.Apply(SVM.Compute).Apply(System.Math.Sign);
-
-            // Plot the results
-            if (ChannalsToTrain.Count(a => a) != 2)
-            {
-                DisplayText.AppendText("\n Result can not be shown os a 2D Plot");
-                return;
-            }
-
-            ScatterplotBox.Show("Expected results", DataTraining, totalOutput);
-            ScatterplotBox.Show("GaussianSVM results", DataTraining, answers);
-
-            IsClassificatorTrained = true;
+            Trainner.Train(Pose1RawData, Pose2RawData, ChannalsToTrain);                       
         }
 
         private void USB_Connect_Click(object sender, RoutedEventArgs e)
@@ -331,13 +291,22 @@ namespace MyoAnalyzer
 
             if (_hub.Myos.Count == 0)
             {
-                DisplayText.AppendText("\n No Myo device found! please connect one and try again.");
+                ErroMassege error = new ErroMassege("\n No Myo device found! please connect one and try again.");
+                error.Show();
                 return;
             }
 
-            if (!IsClassificatorTrained)
+            if (Trainner == null)
             {
-                DisplayText.AppendText("\n You need to train you classificator first in order to do live!");
+                ErroMassege error = new ErroMassege("\n You need create a classificator first!");
+                error.Show();
+                return;
+            }
+
+            if (!Trainner.IsTrainned())
+            {
+                ErroMassege error = new ErroMassege("\n You need to train you classificator first in order to teste it!");
+                error.Show();
                 return;
             }
 
@@ -345,29 +314,23 @@ namespace MyoAnalyzer
 
             if (State != AppState.Acquiring)
             {
-                State = AppState.Acquiring;
                 _dataColected = new List<int[]>();
+                State = AppState.Acquiring;            
                 return;
             }
 
             State = AppState.Waiting;
 
-            var data = ExtractFeatures(_dataColected);
-
-            int[] answers = data.Apply(SVM.Compute).Apply(System.Math.Sign);
-
-            PlotTestDataButton.Visibility = Visibility.Visible;
+            int result = Trainner.Classify(_dataColected, 1, 3);            
 
             try
             {
-                _connectClick.SendDataToUsb(answers[0] == -1 ? "1" : "3");
+                _connectClick.SendDataToUsb(result.ToString());
             }
             catch (Exception)
             {
-                DisplayText.AppendText("\n No USB device detected! But the result was: " + answers[0].ToString()); ;
+                DisplayText.AppendText("\n No USB device detected! But the result was: " + result.ToString()); ;
             }
-            
-
         }
 
         private void PlotTest_Click(object sender, RoutedEventArgs e)
@@ -384,89 +347,20 @@ namespace MyoAnalyzer
                 return;
             }
 
-            if (!IsClassificatorTrained)
+            if (Trainner == null)
             {
                 DisplayText.AppendText("\n You need to train you classificator first in order to do live!");
                 return;
             }
+
+            if (!Trainner.IsTrainned())
+            {
+                
+            }
         }
 
         #endregion ButtonClicks
-
-        private double[][] ExtractFeatures(List<EmgTrainData> pose1RawData, List<EmgTrainData> pose2RawData)
-        {
-            var allRawData = new List<EmgTrainData>(pose1RawData.Count + pose2RawData.Count);
-
-            allRawData.AddRange(pose1RawData);
-            allRawData.AddRange(pose2RawData);
-
-            double[][] model = new double[allRawData.Count][];
-
-            int i = 0;
-
-            foreach (var poseSet in allRawData)
-            {
-                model[i] = GetAverageEnergi(poseSet);
-                i++;
-            }
-
-            return model;
-        }
-
-        private double[][] ExtractFeatures(List<int[]> pose1RawData)
-        {
-            double[][] model = new double[pose1RawData.Count][];
-
-            int dataNumber = 0;
-
-            foreach (var poseSet in pose1RawData)
-            {
-                double[] dataSet = new double[ChannalsToTrain.Count(a => a)];
-                var c = 0;
-
-                for (var i = 0; i < poseSet.Length; i++)
-                {
-                    if (!ChannalsToTrain[i]) continue;
-                    dataSet[c] = dataSet[c] + Math.Pow((double)poseSet[i], 2);
-                    c++;
-                }
-
-                for (var j = 0; j < dataSet.Length; j++)
-                {
-                    dataSet[j] = Math.Sqrt(dataSet[j] / pose1RawData.Count);
-                }
-
-                model[dataNumber] = dataSet;
-            }
-
-            return model;
-        }
-
-        private double[] GetAverageEnergi(EmgTrainData v)
-        {
-            double[] model = new double[ChannalsToTrain.Count(a => a)];
-
-            foreach (var value in v.AquisitionData)
-            {
-                int c = 0;
-                for (int i = 0; i < ChannalsToTrain.Length; i++)
-                {
-                    if (ChannalsToTrain[i])
-                    {
-                        model[c] = model[c] + Math.Pow(value[i], 2);
-                        c++;
-                    }
-                }
-            }
-
-            for (int j = 0; j < model.Length; j++)
-            {
-                model[j] = Math.Sqrt(model[j] / v.AquisitionData.Count);
-            }
-
-            return model;
-        }
-              
+                   
         //TODO: Implement Multiple training methos.
         private void TrainMethodChanges(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -491,8 +385,6 @@ namespace MyoAnalyzer
                     DefaultTrain = TrainMethods.NeuralNetworks;
                     break;
             }
-        }
-
-       
+        }      
     }
 }
