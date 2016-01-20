@@ -28,7 +28,7 @@ namespace MyoAnalyzer
             if (_channelsToTrain == null)
                 return 0;
 
-            var data = ExtractFeatures(rawData);
+            var data = ExtractFeaturesFromSingleTry(rawData);
 
             var answers = data.Apply(SVM.Compute).Apply(Math.Sign);
 
@@ -88,31 +88,31 @@ namespace MyoAnalyzer
 
         }
 
-        private double[][] ExtractFeatures(List<int[]> pose1RawData)
+        private double[][] ExtractFeaturesFromSingleTry(List<int[]> pose1RawData)
         {
-            double[][] model = new double[pose1RawData.Count][];
+            double[][] model = new double[1][];
 
-            int dataNumber = 0;
+            model[0] = new double[_channelsToTrain.Count(a => a)];
 
-            foreach (var poseSet in pose1RawData)
+            int dataTrained = 0;
+
+            for (int i = 0; i < _channelsToTrain.Length - 1; i++)
             {
-                double[] dataSet = new double[_channelsToTrain.Count(a => a)];
-                var c = 0;
-
-                for (var i = 0; i < poseSet.Length -1; i++)
+              
+                if (_channelsToTrain[i])
                 {
-                    if (!_channelsToTrain[i]) continue;
-                    dataSet[c] = dataSet[c] + Math.Pow(poseSet[i], 2);
-                    c++;
+                    foreach (var poseSet in pose1RawData)
+                    {
+                        model[0][dataTrained] += Math.Pow(poseSet[i], 2);                       
+                    }
+                    dataTrained++;
                 }
-
-                for (var j = 0; j < dataSet.Length; j++)
-                {
-                    dataSet[j] = Math.Sqrt(dataSet[j] / pose1RawData.Count);
-                }
-
-                model[dataNumber] = dataSet;
             }
+
+            for (var j = 0; j < model[0].Length; j++)
+            {
+                model[0][j] = Math.Sqrt(model[0][j] / pose1RawData.Count);
+            }           
 
             return model;
         }

@@ -6,7 +6,6 @@ using PlotForm;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -75,6 +74,17 @@ namespace MyoAnalyzer
             _hub.MyoDisconnected += Hub_MyoDisconnected;
         }
 
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            _channel.StartListening();
+        }
+
+        private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _channel.Dispose();
+            _hub.Dispose();
+        }
+
         #region Myo EventHandlers
 
         private void Hub_MyoDisconnected(object sender, MyoEventArgs e)
@@ -112,19 +122,7 @@ namespace MyoAnalyzer
         }
 
         #endregion Myo EventHandlers
-
-        private void OnLoad(object sender, RoutedEventArgs e)
-        {
-            // start listening for Myo _dataColected
-            _channel.StartListening();
-        }
-
-        private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            _channel.Dispose();
-            _hub.Dispose();
-        }
-
+       
         #region ButtonClicks
         private void GetDataClick(object sender, RoutedEventArgs e)
         {
@@ -145,9 +143,7 @@ namespace MyoAnalyzer
 
             State = AppState.Acquiring;
             StartTime = DateTime.UtcNow;
-            _dataColected = new List<int[]>();
-            ErroMassege erro = new ErroMassege("You are now recording Emg Data from Myo");
-            erro.Show();
+            _dataColected = new List<int[]>();          
             DisplayText.AppendText("\n You are now recording Emg Data from Myo");
             DisplayText.ScrollToEnd();
             GetDataButton.Content = "Stop Acquiring";
@@ -308,20 +304,23 @@ namespace MyoAnalyzer
                 ErroMassege error = new ErroMassege("\n You need to train you classificator first in order to teste it!");
                 error.Show();
                 return;
-            }
-
-            this.TestClassificationButton.Content = State == AppState.Waiting ? "Start Test" : " Finish ";
+            }           
 
             if (State != AppState.Acquiring)
             {
                 _dataColected = new List<int[]>();
-                State = AppState.Acquiring;            
+                State = AppState.Acquiring;
+                TestClassificationButton.Content = " Finish ";
                 return;
             }
 
             State = AppState.Waiting;
+            TestClassificationButton.Content = "Start Test";
 
-            int result = Trainner.Classify(_dataColected, 1, 3);            
+            int result = Trainner.Classify(_dataColected, 1, 3);
+
+            DisplayText.AppendText("\n No USB device detected! But the result was: " + result.ToString());
+            DisplayText.ScrollToEnd();
 
             try
             {
@@ -355,13 +354,22 @@ namespace MyoAnalyzer
 
             if (!Trainner.IsTrainned())
             {
-                
+                ErroMassege error = new ErroMassege("\n You need to train you classificator first in order to teste it!");
+                error.Show();
+                return;
+            }
+
+            if (State != AppState.Acquiring)
+            {
+                _dataColected = new List<int[]>();
+                State = AppState.Acquiring;
+                TestClassificationButton.Content = " Finish ";
+                return;
             }
         }
 
         #endregion ButtonClicks
-                   
-        //TODO: Implement Multiple training methos.
+                          
         private void TrainMethodChanges(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             // ... Get the ComboBox.
