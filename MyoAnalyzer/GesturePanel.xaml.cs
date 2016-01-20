@@ -22,19 +22,15 @@ namespace MyoAnalyzer
     public partial class GesturePanel : UserControl
     {
 
-        public List<EmgTrainData> TotalPoseData;
+        public Pose Pose { get; set; }     
 
-        public string GestureName;
-
-        public GesturePanel(string PoseName)
+        public GesturePanel(string poseName)
         {
             InitializeComponent();
 
-            TotalPoseData = new List<EmgTrainData>();
+            Pose = new Pose(poseName);
 
-            this.PoseName.Text = PoseName;
-
-            GestureName = PoseName;
+            this.PoseName.Text = poseName;           
         }
 
         private void LoadPoseData_Click(object sender, RoutedEventArgs e)
@@ -47,6 +43,8 @@ namespace MyoAnalyzer
             {
                 return;
             }
+
+            List<EmgTrainData> totalPoseData = new List<EmgTrainData>();
 
             foreach (string fileName in open.FileNames)
             {
@@ -72,13 +70,20 @@ namespace MyoAnalyzer
 
                 finalData.AquisitionData = model;
 
-                TotalPoseData.Add(finalData);
+                totalPoseData.Add(finalData);
             }
 
-            NumberPose1Samples.Text = TotalPoseData.Count.ToString();
+            Pose.TotalPoseData.AddRange(totalPoseData);
+
+            NumberPose1Samples.Text = Pose.TotalPoseData.Count.ToString();
         }
 
         private void CleanGestureData_Click(object sender, RoutedEventArgs e)
+        {
+            Pose.TotalPoseData = new List<EmgTrainData>();
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -6,6 +6,7 @@ using PlotForm;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,10 +26,7 @@ namespace MyoAnalyzer
         private TrainMethods DefaultTrain;
 
         private List<string> EmgDataToSave;
-        private List<int[]> _dataColected;
-
-        private List<EmgTrainData> Pose1RawData;
-        private List<EmgTrainData> Pose2RawData;
+        private List<int[]> _dataColected;       
 
         // Machi learning variables
         private double[][] DataTraining;
@@ -54,10 +52,7 @@ namespace MyoAnalyzer
             Channel5CheckBox.DataContext = this;
             Channel6CheckBox.DataContext = this;
             Channel7CheckBox.DataContext = this;
-            Channel8CheckBox.DataContext = this;
-
-            Pose1RawData = new List<EmgTrainData>();
-            Pose2RawData = new List<EmgTrainData>();
+            Channel8CheckBox.DataContext = this;           
 
             ChannalsToTrain = new bool[8];
 
@@ -170,109 +165,22 @@ namespace MyoAnalyzer
             DisplayText.AppendText("\n Data contet has been removed!");
             DisplayText.ScrollToEnd();
         }
-
-        private void LoadData1Button_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.OpenFileDialog open = new System.Windows.Forms.OpenFileDialog();
-
-            open.Multiselect = true;
-
-            if (open.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-            {
-                return;
-            }
-
-            foreach (string fileName in open.FileNames)
-            {
-                EmgTrainData finalData = new EmgTrainData();
-
-                List<double[]> model = new List<double[]>();
-
-                string[] lines = System.IO.File.ReadAllLines(fileName);
-
-                foreach (string line in lines)
-                {
-                    string[] datas = line.Split('\t');
-
-                    double[] dData = new double[datas.Length];
-
-                    for (int i = 0; i < datas.Length; i++)
-                    {
-                        dData[i] = Convert.ToDouble(datas[i]);
-                    }
-
-                    model.Add(dData);
-                }
-
-                finalData.AquisitionData = model;
-
-                Pose1RawData.Add(finalData);
-            }
-
-            NumberPose1Samples.Text = Pose1RawData.Count.ToString();
-        }
-
-        private void LoadData2Button_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Forms.OpenFileDialog open = new System.Windows.Forms.OpenFileDialog();
-
-            open.Multiselect = true;
-
-            if (open.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-            {
-                return;
-            }
-
-            foreach (string fileName in open.FileNames)
-            {
-                EmgTrainData finalData = new EmgTrainData();
-
-                List<double[]> model = new List<double[]>();
-
-                string[] lines = System.IO.File.ReadAllLines(fileName);
-
-                foreach (string line in lines)
-                {
-                    string[] datas = line.Split('\t');
-
-                    double[] dData = new double[datas.Length];
-
-                    for (int i = 0; i < datas.Length; i++)
-                    {
-                        dData[i] = Convert.ToDouble(datas[i]);
-                    }
-
-                    model.Add(dData);
-                }
-
-                finalData.AquisitionData = model;
-
-                Pose2RawData.Add(finalData);
-            }
-
-            NumberPose2Samples.Text = Pose2RawData.Count.ToString();
-        }
-
+       
         private void ResetTraining_Click(object sender, RoutedEventArgs e)
-        {
-            Pose1RawData = new List<EmgTrainData>();
-            Pose2RawData = new List<EmgTrainData>();
-
+        {           
             EmgDataToSave = new List<string>();
 
             DisplayText.AppendText("\nAll training data removed!");
-            DisplayText.ScrollToEnd();
-
-            NumberPose1Samples.Text = Pose1RawData.Count.ToString();
-            NumberPose2Samples.Text = Pose2RawData.Count.ToString();
+            DisplayText.ScrollToEnd();         
         }
 
         private void TrainButton_Click(object sender, RoutedEventArgs e)
         {
+            List<Pose> posesToTrain = (from GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
 
             Trainner = new KSVMTrainner();
 
-            Trainner.Train(Pose1RawData, Pose2RawData, ChannalsToTrain);                       
+            Trainner.Train(posesToTrain, ChannalsToTrain);                       
         }
 
         private void USB_Connect_Click(object sender, RoutedEventArgs e)
@@ -317,9 +225,10 @@ namespace MyoAnalyzer
             State = AppState.Waiting;
             TestClassificationButton.Content = "Start Test";
 
-            int result = Trainner.Classify(_dataColected, 1, 3);
+            string result = Trainner.Classify(_dataColected);
 
-            DisplayText.AppendText("\n No USB device detected! But the result was: " + result.ToString());
+            DisplayText.Clear();
+            DisplayText.AppendText("No USB device detected! But the result was: " + result);
             DisplayText.ScrollToEnd();
 
             try
@@ -393,6 +302,18 @@ namespace MyoAnalyzer
                     DefaultTrain = TrainMethods.NeuralNetworks;
                     break;
             }
-        }      
+        }
+
+        private void AddGesture_Click(object sender, RoutedEventArgs e)
+        {
+            GesturePanel newGesture = new GesturePanel(GestureNameBox.Text);            
+
+            GesturesPanel.Children.Add(newGesture);
+        }
+
+        private void CleanGestures_Click(object sender, RoutedEventArgs e)
+        {
+            GesturesPanel.Children.Clear();
+        }
     }
 }

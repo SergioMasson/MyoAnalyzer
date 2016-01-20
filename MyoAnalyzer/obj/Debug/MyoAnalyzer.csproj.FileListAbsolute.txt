@@ -183,3 +183,5 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnal
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.application
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.exe
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.pdb
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\GesturePanel.g.cs
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\GesturePanel.baml

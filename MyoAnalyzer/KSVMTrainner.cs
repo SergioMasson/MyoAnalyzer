@@ -18,15 +18,18 @@ namespace MyoAnalyzer
 
         private bool _isTrainned;
 
+        private string label1;
+        private string label2;
+
         public KSVMTrainner()
         {
             _isTrainned = false;
         }
 
-        public int Classify(List<int[]> rawData, int label1, int label2)
+        public string Classify(List<int[]> rawData)
         {
             if (_channelsToTrain == null)
-                return 0;
+                return "0";
 
             var data = ExtractFeaturesFromSingleTry(rawData);
 
@@ -43,8 +46,16 @@ namespace MyoAnalyzer
 
         }
 
-        public void Train(List<EmgTrainData> pose1RawData, List<EmgTrainData> pose2RawData, bool[] channelsToTrain)
+        public void Train(List<Pose> poseRawData, bool[] channelsToTrain)
         {
+            List<EmgTrainData> pose1RawData = poseRawData.First().TotalPoseData;
+
+            List<EmgTrainData> pose2RawData = poseRawData.Last().TotalPoseData;
+
+            label1 = poseRawData.First().GestureName;
+
+            label2 = poseRawData.First().GestureName;
+
             _channelsToTrain = channelsToTrain;
 
             int classifierSize = channelsToTrain.Count(a => a);

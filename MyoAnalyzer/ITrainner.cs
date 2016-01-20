@@ -10,9 +10,9 @@ namespace MyoAnalyzer
 {
     interface ITrainner
     {
-        void Train(List<EmgTrainData> pose1RawData, List<EmgTrainData> pose2RawData, bool[] channelsToTrain);
+        void Train(List<Pose> pose1RawData, bool[] channelsToTrain);
 
-        int Classify(List<int[]> rawData, int label1, int label2);
+        string Classify(List<int[]> rawData);
 
         void ResetTrain();
 
