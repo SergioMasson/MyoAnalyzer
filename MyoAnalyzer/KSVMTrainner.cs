@@ -162,7 +162,7 @@ namespace MyoAnalyzer
             return model;
         }
 
-        bool ITrainner.IsTrainned()
+        public bool IsTrainned()
         {
             return _isTrainned;
         }
