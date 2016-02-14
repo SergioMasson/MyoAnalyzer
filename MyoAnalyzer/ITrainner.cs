@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.RightsManagement;
-using System.Text;
-using System.Threading.Tasks;
-using DataClasses;
+﻿using System.Collections.Generic;
 
 namespace MyoAnalyzer
 {
     interface ITrainner
     {
-        void Train(List<Pose> pose1RawData, bool[] channelsToTrain);
+        double Train(List<Pose> pose1RawData, bool[] channelsToTrain);
 
         string Classify(List<int[]> rawData);
 

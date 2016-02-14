@@ -97,9 +97,8 @@ namespace ComunicadorSerial_Arduino
 
         // Botão utilizado para enviar comandos para o Arduino
         private void btEnviar_Click(object sender, EventArgs e)
-        {
-            if (serialPort1.IsOpen)          //porta está aberta
-                serialPort1.Write(textBoxEnviar.Text);  //envia o texto presente no textbox
+        {           
+            SendDataToUsb(textBoxEnviar.Text);  //envia o texto presente no textbox
         }
 
         private void timerCOM_Tick_1(object sender, EventArgs e)
@@ -109,8 +108,19 @@ namespace ComunicadorSerial_Arduino
 
         public void SendDataToUsb(string massege)
         {
-            if (serialPort1.IsOpen)          //porta está aberta
-                serialPort1.Write(massege);  //envia o texto presente no textbox
+            if (serialPort1.IsOpen)
+                serialPort1.Write(massege);
+            else
+            {
+                serialPort1.PortName = comboBox1.Items[comboBox1.SelectedIndex].ToString();
+                serialPort1.Open();
+                serialPort1.Write(massege);
+            }  
+        }
+
+        private void USBConnectInterface_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

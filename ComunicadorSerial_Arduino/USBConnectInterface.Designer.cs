@@ -103,6 +103,7 @@
             this.Name = "USBConnectInterface";
             this.Text = "Arduino Reader";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.USBConnectInterface_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

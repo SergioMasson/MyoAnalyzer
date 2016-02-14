@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyoAnalyzer", "MyoAnalyzer\MyoAnalyzer.csproj", "{712DEE51-9F87-4578-9EF0-EF55F5F54FB6}"
 EndProject
@@ -13,8 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataClasses", "DataClasses\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{8D4A4F1B-78C9-4F7C-B494-A7928A24EA14}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\..\Downloads\Accord.NET (icon).ico = ..\..\..\..\..\..\Downloads\Accord.NET (icon).ico
-		..\..\..\..\..\..\Downloads\matlab64.ico = ..\..\..\..\..\..\Downloads\matlab64.ico
+		..\..\..\..\..\Downloads\Accord.NET (icon).ico = ..\..\..\..\..\Downloads\Accord.NET (icon).ico
+		..\..\..\Desktop\logo.ico = ..\..\..\Desktop\logo.ico
+		..\..\..\..\..\Downloads\matlab64.ico = ..\..\..\..\..\Downloads\matlab64.ico
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComunicadorSerial_Arduino", "ComunicadorSerial_Arduino\ComunicadorSerial_Arduino.csproj", "{35D4330A-F09D-4C59-A591-05BCA0777C27}"

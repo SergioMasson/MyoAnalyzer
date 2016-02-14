@@ -46,7 +46,7 @@ namespace MyoAnalyzer
 
         }
 
-        public void Train(List<Pose> poseRawData, bool[] channelsToTrain)
+        public double Train(List<Pose> poseRawData, bool[] channelsToTrain)
         {
             List<EmgTrainData> pose1RawData = poseRawData.First().TotalPoseData;
 
@@ -54,7 +54,7 @@ namespace MyoAnalyzer
 
             label1 = poseRawData.First().GestureName;
 
-            label2 = poseRawData.First().GestureName;
+            label2 = poseRawData.Last().GestureName;
 
             _channelsToTrain = channelsToTrain;
 
@@ -81,7 +81,7 @@ namespace MyoAnalyzer
             };
 
             // Teach the vector machine
-            teacher.Run();
+            double error = teacher.Run()*100;
 
             // Classify the samples using the model
             int[] answers = dataTraining.Apply(SVM.Compute).Apply(Math.Sign);
@@ -91,11 +91,13 @@ namespace MyoAnalyzer
             // Plot the results
             if (classifierSize != 2)
             {                
-                return;
+                return error;
             }
 
             ScatterplotBox.Show("Expected results", dataTraining, totalOutput);
             ScatterplotBox.Show("GaussianSVM results", dataTraining, answers);
+
+            return error;
 
         }
 

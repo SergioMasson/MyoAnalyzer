@@ -169,12 +169,14 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\zh-tw\Z
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.csprojResolveAssemblyReference.cache
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.csproj.ResolveComReference.cache
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\ErroMassege.g.cs
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\GesturePanel.g.cs
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MainWindow.g.cs
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\App.g.cs
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer_Content.g.cs
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer_MarkupCompile.cache
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer_MarkupCompile.lref
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\ErroMassege.baml
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\GesturePanel.baml
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MainWindow.baml
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.g.resources
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.Properties.Resources.resources
@@ -183,5 +185,3 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnal
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.application
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.exe
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\MyoAnalyzer.pdb
-C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\GesturePanel.g.cs
-C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\GesturePanel.baml

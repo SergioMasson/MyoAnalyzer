@@ -1,5 +1,4 @@
 ﻿using ComunicadorSerial_Arduino;
-using DataClasses;
 using MyoSharp.Communication;
 using MyoSharp.Device;
 using PlotForm;
@@ -26,7 +25,7 @@ namespace MyoAnalyzer
         private TrainMethods DefaultTrain;
 
         private List<string> EmgDataToSave;
-        private List<int[]> _dataColected;       
+        private List<int[]> _dataColected;
 
         // Machi learning variables
         private double[][] DataTraining;
@@ -52,7 +51,7 @@ namespace MyoAnalyzer
             Channel5CheckBox.DataContext = this;
             Channel6CheckBox.DataContext = this;
             Channel7CheckBox.DataContext = this;
-            Channel8CheckBox.DataContext = this;           
+            Channel8CheckBox.DataContext = this;
 
             ChannalsToTrain = new bool[8];
 
@@ -117,8 +116,9 @@ namespace MyoAnalyzer
         }
 
         #endregion Myo EventHandlers
-       
+
         #region ButtonClicks
+
         private void GetDataClick(object sender, RoutedEventArgs e)
         {
             if (State == AppState.Acquiring)
@@ -138,7 +138,7 @@ namespace MyoAnalyzer
 
             State = AppState.Acquiring;
             StartTime = DateTime.UtcNow;
-            _dataColected = new List<int[]>();          
+            _dataColected = new List<int[]>();
             DisplayText.AppendText("\n You are now recording Emg Data from Myo");
             DisplayText.ScrollToEnd();
             GetDataButton.Content = "Stop Acquiring";
@@ -153,7 +153,7 @@ namespace MyoAnalyzer
             if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 StreamWriter writer = new StreamWriter(save.OpenFile());
-                EmgDataToSave.FormatData(writer);
+                EmgDataToSave.RemoveDuplicates(writer);
                 writer.Dispose();
                 writer.Close();
             }
@@ -165,22 +165,25 @@ namespace MyoAnalyzer
             DisplayText.AppendText("\n Data contet has been removed!");
             DisplayText.ScrollToEnd();
         }
-       
+
         private void ResetTraining_Click(object sender, RoutedEventArgs e)
-        {           
+        {
             EmgDataToSave = new List<string>();
 
             DisplayText.AppendText("\nAll training data removed!");
-            DisplayText.ScrollToEnd();         
+            DisplayText.ScrollToEnd();
         }
 
         private void TrainButton_Click(object sender, RoutedEventArgs e)
         {
             List<Pose> posesToTrain = (from GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
 
-            Trainner = new KSVMTrainner();
+            Trainner = new KSVMMultipleTrainner();
 
-            Trainner.Train(posesToTrain, ChannalsToTrain);                       
+            var error = Trainner.Train(posesToTrain, ChannalsToTrain);
+
+            DisplayText.AppendText("\nTrainning sucsseded! The total error for your classification was:" + error + " % ");
+            DisplayText.ScrollToEnd();
         }
 
         private void USB_Connect_Click(object sender, RoutedEventArgs e)
@@ -192,7 +195,6 @@ namespace MyoAnalyzer
 
         private void TestClassification_Click(object sender, RoutedEventArgs e)
         {
-
             if (_hub.Myos.Count == 0)
             {
                 ErroMassege error = new ErroMassege("\n No Myo device found! please connect one and try again.");
@@ -212,7 +214,7 @@ namespace MyoAnalyzer
                 ErroMassege error = new ErroMassege("\n You need to train you classificator first in order to teste it!");
                 error.Show();
                 return;
-            }           
+            }
 
             if (State != AppState.Acquiring)
             {
@@ -231,24 +233,24 @@ namespace MyoAnalyzer
             DisplayText.AppendText("No USB device detected! But the result was: " + result);
             DisplayText.ScrollToEnd();
 
-            try
+            DisplayText.AppendText("\n No USB device detected! But the result was: " + result);
+
+            if (result == "Aberta")
             {
-                _connectClick.SendDataToUsb(result.ToString());
+                _connectClick.SendDataToUsb("2");
             }
-            catch (Exception)
+            else
             {
-                DisplayText.AppendText("\n No USB device detected! But the result was: " + result.ToString()); ;
+                _connectClick.SendDataToUsb("1");
             }
         }
 
         private void PlotTest_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void GoLive_Click(object sender, RoutedEventArgs e)
         {
-
             if (_hub.Myos.Count == 0)
             {
                 DisplayText.AppendText("\n No Myo device found! please connect one and try again.");
@@ -278,7 +280,7 @@ namespace MyoAnalyzer
         }
 
         #endregion ButtonClicks
-                          
+
         private void TrainMethodChanges(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             // ... Get the ComboBox.
@@ -306,7 +308,7 @@ namespace MyoAnalyzer
 
         private void AddGesture_Click(object sender, RoutedEventArgs e)
         {
-            GesturePanel newGesture = new GesturePanel(GestureNameBox.Text);            
+            GesturePanel newGesture = new GesturePanel(GestureNameBox.Text);
 
             GesturesPanel.Children.Add(newGesture);
         }

@@ -11,9 +11,5 @@ namespace DataClasses
         }
 
         public List<double[]> AquisitionData { get; set; }
-        public string GestureName { get; set; }
-        public int GestureCode { get; set; }
 }
-
-
 }
