@@ -53,9 +53,7 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer\PlotForm\obj\Debug\PlotForm.pdb
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\PlotForm\bin\Debug\PlotForm.exe.config
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\PlotForm\bin\Debug\PlotForm.exe
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\PlotForm\bin\Debug\PlotForm.pdb
-C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\PlotForm\bin\Debug\DataClasses.dll
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\PlotForm\bin\Debug\ZedGraph.dll
-C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\PlotForm\bin\Debug\DataClasses.pdb
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\PlotForm\bin\Debug\ZedGraph.xml
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\PlotForm\bin\Debug\de\ZedGraph.resources.dll
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\PlotForm\bin\Debug\es\ZedGraph.resources.dll

@@ -5,9 +5,9 @@ using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
 using Accord.Math;
 using Accord.Statistics.Kernels;
-using DataClasses;
+using MyoAnalyzer.Classification;
 
-namespace MyoAnalyzer
+namespace MyoAnalyzer.Classification
 {
     class KSVMMultipleTrainner : ITrainner
     {

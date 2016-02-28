@@ -16,10 +16,10 @@
         </Rectangle>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="264,17,0,0" TextWrapping="Wrap" Text="Machine Learning Tools" VerticalAlignment="Top" Height="20" Width="225" FontWeight="Bold"/>
         <TextBlock x:Name="Pose1TexBlock" HorizontalAlignment="Left" Height="21" Margin="10,19,0,0" TextWrapping="Wrap" Text="Data Acquisition Tools" VerticalAlignment="Top" Width="213" FontWeight="Bold"/>
-        <Button x:Name="TrainButton" Content="Train" HorizontalAlignment="Left" Margin="507,150,0,0" VerticalAlignment="Top" Width="92" Height="39" Click="TrainButton_Click"/>
+        <Button x:Name="TrainButton" Content="Train" HorizontalAlignment="Left" Margin="512,228,0,0" VerticalAlignment="Top" Width="92" Height="39" Click="TrainButton_Click"/>
         <TextBlock x:Name="USBMenu" HorizontalAlignment="Left" Margin="10,251,0,0" TextWrapping="Wrap" Text="USB Connect Tools" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Button x:Name="ResetTrainingButton" Content="Reset" HorizontalAlignment="Left" Margin="630,150,0,0" VerticalAlignment="Top" Width="93" Height="39" Click="ResetTraining_Click"/>
-        <ComboBox x:Name="TrainMethod" HorizontalAlignment="Left" Height="20" Margin="507,122,0,0" VerticalAlignment="Top" Width="216" SelectionChanged="TrainMethodChanges">
+        <Button x:Name="ResetTrainingButton" Content="Reset" HorizontalAlignment="Left" Margin="624,228,0,0" VerticalAlignment="Top" Width="93" Height="39" Click="ResetTraining_Click"/>
+        <ComboBox x:Name="TrainMethod" HorizontalAlignment="Left" Height="20" Margin="512,198,0,0" VerticalAlignment="Top" Width="216" SelectionChanged="TrainMethodChanges">
             <ComboBoxItem IsSelected="True" Content="Select Training Method"/>
             <ComboBoxItem Content="Kernel" />
             <ComboBoxItem Content="Linear SVM" />
@@ -36,25 +36,38 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
-        <TextBlock x:Name="LiveTrainingMenu" HorizontalAlignment="Left" Height="19" Margin="507,194,0,0" TextWrapping="Wrap" Text="Classification Test" VerticalAlignment="Top" Width="149" FontWeight="Bold"/>
-        <Button x:Name="TestClassificationButton" Content="Start Test" HorizontalAlignment="Left" Margin="507,220,0,0" VerticalAlignment="Top" Width="97" Height="36" FontWeight="Bold" Click="TestClassification_Click"/>
-        <TextBlock x:Name="ClassificationChannel" HorizontalAlignment="Left" Height="18" Margin="507,22,0,0" TextWrapping="Wrap" Text="Select Channels for classification:" VerticalAlignment="Top" Width="225" FontWeight="Bold"/>
-        <CheckBox x:Name="Channel1CheckBox" Content="Channel 1" HorizontalAlignment="Left" Margin="506,42,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[0], Mode=TwoWay}"/>
-        <CheckBox x:Name="Channel2CheckBox" Content="Channel 2" HorizontalAlignment="Left" Margin="506,62,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[1], Mode=TwoWay}"/>
-        <CheckBox x:Name="Channel3CheckBox" Content="Channel 3" HorizontalAlignment="Left" Margin="506,82,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[2], Mode=TwoWay}"/>
-        <CheckBox x:Name="Channel4CheckBox" Content="Channel 4" HorizontalAlignment="Left" Margin="506,102,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[3], Mode=TwoWay}"/>
-        <CheckBox x:Name="Channel5CheckBox" Content="Channel 5" HorizontalAlignment="Left" Margin="600,42,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[4], Mode=TwoWay}"/>
-        <CheckBox x:Name="Channel6CheckBox" Content="Channel 6" HorizontalAlignment="Left" Margin="600,62,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[5], Mode=TwoWay}"/>
-        <CheckBox x:Name="Channel7CheckBox" Content="Channel 7" HorizontalAlignment="Left" Margin="600,82,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[6], Mode=TwoWay}"/>
-        <CheckBox x:Name="Channel8CheckBox" Content="Channel 8" HorizontalAlignment="Left" Margin="600,102,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[7], Mode=TwoWay}"/>
-        <TextBlock x:Name="Live" HorizontalAlignment="Left" Height="19" Margin="507,272,0,0" TextWrapping="Wrap" Text="Live Classification" VerticalAlignment="Top" Width="149" FontWeight="Bold"/>
+        <TextBlock x:Name="LiveTrainingMenu" HorizontalAlignment="Left" Height="19" Margin="506,280,0,0" TextWrapping="Wrap" Text="Classification Test" VerticalAlignment="Top" Width="111" FontWeight="Bold"/>
+        <Button x:Name="TestClassificationButton" Content="Start Test" HorizontalAlignment="Left" Margin="512,308,0,0" VerticalAlignment="Top" Width="97" Height="33" FontWeight="Bold" Click="TestClassification_Click"/>
+        <TextBlock x:Name="ClassificationChannel" HorizontalAlignment="Left" Height="18" Margin="511,89,0,0" TextWrapping="Wrap" Text="Select Channels for classification:" VerticalAlignment="Top" Width="225" FontWeight="Bold"/>
+        <CheckBox x:Name="Channel1CheckBox" Content="Channel 1" HorizontalAlignment="Left" Margin="511,118,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[0], Mode=TwoWay}"/>
+        <CheckBox x:Name="Channel2CheckBox" Content="Channel 2" HorizontalAlignment="Left" Margin="511,138,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[1], Mode=TwoWay}"/>
+        <CheckBox x:Name="Channel3CheckBox" Content="Channel 3" HorizontalAlignment="Left" Margin="511,158,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[2], Mode=TwoWay}"/>
+        <CheckBox x:Name="Channel4CheckBox" Content="Channel 4" HorizontalAlignment="Left" Margin="511,178,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[3], Mode=TwoWay}"/>
+        <CheckBox x:Name="Channel5CheckBox" Content="Channel 5" HorizontalAlignment="Left" Margin="605,118,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[4], Mode=TwoWay}"/>
+        <CheckBox x:Name="Channel6CheckBox" Content="Channel 6" HorizontalAlignment="Left" Margin="605,138,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[5], Mode=TwoWay}"/>
+        <CheckBox x:Name="Channel7CheckBox" Content="Channel 7" HorizontalAlignment="Left" Margin="605,158,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[6], Mode=TwoWay}"/>
+        <CheckBox x:Name="Channel8CheckBox" Content="Channel 8" HorizontalAlignment="Left" Margin="605,178,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[7], Mode=TwoWay}"/>
+        <TextBlock x:Name="Live" HorizontalAlignment="Left" Height="19" Margin="634,280,0,0" TextWrapping="Wrap" Text="Live Classification" VerticalAlignment="Top" Width="103" FontWeight="Bold"/>
         <Button x:Name="PlotTestDataButton" Content="Plot Test" HorizontalAlignment="Left" Margin="619,58,0,0" VerticalAlignment="Top" Width="98" Height="36" FontWeight="Bold" Visibility="Hidden" Click="PlotTest_Click"/>
-        <Button x:Name="GoLiveButton" Content="Go Live!" HorizontalAlignment="Left" Margin="507,296,0,0" VerticalAlignment="Top" Width="97" Height="33" FontWeight="Bold" Click="GoLive_Click"/>
+        <Button x:Name="GoLiveButton" Content="Go Live!" HorizontalAlignment="Left" Margin="631,308,0,0" VerticalAlignment="Top" Width="97" Height="33" FontWeight="Bold" Click="GoLive_Click"/>
         <Button x:Name="AddNewGesture" Content="Add" HorizontalAlignment="Left" Margin="381,72,0,0" VerticalAlignment="Top" Width="43" Height="22" Click="AddGesture_Click"/>
         <Button x:Name="CleanGestures" Content="Clean" HorizontalAlignment="Left" Margin="435,72,0,0" VerticalAlignment="Top" Width="43" Height="22" Click="CleanGestures_Click"/>
         <StackPanel x:Name="GesturesPanel" HorizontalAlignment="Left" Height="257" Margin="249,102,0,0" VerticalAlignment="Top" Width="252"/>
         <TextBox x:Name="GestureNameBox" HorizontalAlignment="Left" Height="22" Margin="256,72,0,0" TextWrapping="Wrap" Text="Name..." VerticalAlignment="Top" Width="120"/>
         <Separator HorizontalAlignment="Left" Height="5" Margin="256,45,0,0" VerticalAlignment="Top" Width="225"/>
         <TextBlock x:Name="NewPoseText" HorizontalAlignment="Left" Margin="256,51,0,0" TextWrapping="Wrap" Text="Add new Pose:" VerticalAlignment="Top"/>
+        <Separator HorizontalAlignment="Left" Height="4" Margin="589,310,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="89.604"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <TextBlock x:Name="PreprocessingMenu" HorizontalAlignment="Left" Height="18" Margin="511,19,0,0" TextWrapping="Wrap" Text="Preprocessing Tools" VerticalAlignment="Top" Width="118" FontWeight="Bold"/>
+        <Button x:Name="RankDataButton" Content="Rank Attributes"  HorizontalAlignment="Left" Margin="512,46,0,0" VerticalAlignment="Top" Width="93" Height="31" Click="RankAttributes_Click" Visibility="Hidden"/>
+        <Button x:Name="DigitalFilters_MenuButton" Content="Digital Filters"  HorizontalAlignment="Left" Margin="619,46,0,0" VerticalAlignment="Top" Width="93" Height="31"/>
     </Grid>
 </Window>

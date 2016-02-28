@@ -87,12 +87,6 @@
   <ItemGroup>
     <Content Include="License-LGPL.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataClasses\DataClasses.csproj">
-      <Project>{f3ad35bc-ce48-4c8c-b7b1-e14dec649d03}</Project>
-      <Name>DataClasses</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

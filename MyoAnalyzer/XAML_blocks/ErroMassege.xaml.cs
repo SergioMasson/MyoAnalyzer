@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MyoAnalyzer
+namespace MyoAnalyzer.XAML_blocks
 {
     /// <summary>
     /// Interaction logic for ErroMassege.xaml

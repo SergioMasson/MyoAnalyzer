@@ -8,6 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using MyoAnalyzer.Classification;
+using MyoAnalyzer.XAML_blocks;
 
 namespace MyoAnalyzer
 {
@@ -33,7 +35,7 @@ namespace MyoAnalyzer
         // Class to perform the trainning
         private ITrainner Trainner;
 
-        //Arduino
+        // Arduino
         private USBConnectInterface _connectClick;
 
         public bool[] ChannalsToTrain { get; set; }
@@ -176,7 +178,7 @@ namespace MyoAnalyzer
 
         private void TrainButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Pose> posesToTrain = (from GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
+            List<Pose> posesToTrain = (from XAML_blocks.GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
 
             Trainner = new KSVMMultipleTrainner();
 
@@ -197,21 +199,21 @@ namespace MyoAnalyzer
         {
             if (_hub.Myos.Count == 0)
             {
-                ErroMassege error = new ErroMassege("\n No Myo device found! please connect one and try again.");
+                XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n No Myo device found! please connect one and try again.");
                 error.Show();
                 return;
             }
 
             if (Trainner == null)
             {
-                ErroMassege error = new ErroMassege("\n You need create a classificator first!");
+                XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n You need create a classificator first!");
                 error.Show();
                 return;
             }
 
             if (!Trainner.IsTrainned())
             {
-                ErroMassege error = new ErroMassege("\n You need to train you classificator first in order to teste it!");
+                XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n You need to train you classificator first in order to teste it!");
                 error.Show();
                 return;
             }
@@ -265,7 +267,7 @@ namespace MyoAnalyzer
 
             if (!Trainner.IsTrainned())
             {
-                ErroMassege error = new ErroMassege("\n You need to train you classificator first in order to teste it!");
+                XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n You need to train you classificator first in order to teste it!");
                 error.Show();
                 return;
             }
@@ -277,6 +279,14 @@ namespace MyoAnalyzer
                 TestClassificationButton.Content = " Finish ";
                 return;
             }
+        }
+
+        private void RankAttributes_Click(object sender, RoutedEventArgs e)
+        {
+            List<Pose> posesToRankAttributes = (from XAML_blocks.GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
+
+            AttributeRankWindow RankWindow = new AttributeRankWindow(posesToRankAttributes);
+            RankWindow.Show();
         }
 
         #endregion ButtonClicks
@@ -308,14 +318,20 @@ namespace MyoAnalyzer
 
         private void AddGesture_Click(object sender, RoutedEventArgs e)
         {
-            GesturePanel newGesture = new GesturePanel(GestureNameBox.Text);
+            XAML_blocks.GesturePanel newGesture = new XAML_blocks.GesturePanel(GestureNameBox.Text);
 
             GesturesPanel.Children.Add(newGesture);
+
+            if (GesturesPanel.Children.Count > 1 && RankDataButton.Visibility == Visibility.Hidden)
+            {
+                RankDataButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void CleanGestures_Click(object sender, RoutedEventArgs e)
         {
             GesturesPanel.Children.Clear();
-        }
+            RankDataButton.Visibility = Visibility.Hidden;
+        }       
     }
 }

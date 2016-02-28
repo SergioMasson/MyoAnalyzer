@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MyoAnalyzer
+namespace MyoAnalyzer.Classification
 {
     interface ITrainner
     {
@@ -11,7 +11,6 @@ namespace MyoAnalyzer
         void ResetTrain();
 
         bool IsTrainned();
-
     }
 
 }
