@@ -11,7 +11,6 @@ namespace MyoAnalyzer.Classification.Ranker
     {
         public double[][] RankFeatures(double[][] rawData1, double[][] rawData2, int channelNumber)
         {
-
             List<Attribute> attributes = new List<Attribute>();           
 
             if (rawData1 == null || rawData2.Length == 0)
@@ -25,13 +24,7 @@ namespace MyoAnalyzer.Classification.Ranker
             var model = attributes.OrderByDescending(a => a.GetQuality()).Select(GetProperties).Take(channelNumber).ToArray();
 
             return model;
-        }
-
-        private double CompateDistance(double average, IEnumerable<double> otherAverages)
-        {
-            double isolationCoef = otherAverages.Sum(a => Math.Pow(a - average, 2))/ otherAverages.Count();
-            return isolationCoef;
-        }
+        }      
 
         private Attribute GetAttributeQuality(double[][] rawData1, double[][] rawData2, int channel)
         {
@@ -75,7 +68,7 @@ namespace MyoAnalyzer.Classification.Ranker
 
         private double[] GetProperties(Attribute atribute)
         {
-            double[] model = new double[4];
+            double[] model = new double[5];
 
             model[0] = atribute.Number;
 
@@ -84,6 +77,8 @@ namespace MyoAnalyzer.Classification.Ranker
             model[2] = atribute.Average2;
 
             model[3] = atribute.StDeviation1 + atribute.StDeviation2;
+
+            model[4] = atribute.GetQuality();
 
             return model;
 
@@ -111,7 +106,6 @@ namespace MyoAnalyzer.Classification.Ranker
         {
             return Math.Abs(Average1 - Average2)/(StDeviation1 + StDeviation2);
         } 
-
     }
     
  

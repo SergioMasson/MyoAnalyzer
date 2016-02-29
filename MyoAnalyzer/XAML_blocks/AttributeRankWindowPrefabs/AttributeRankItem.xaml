@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyoAnalyzer.XAML_blocks.AttributeRankWindowPrefabs"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="380">
-    <Grid Background="#FFF4F4F5" Width="370" Margin="0,0,0,10" HorizontalAlignment="Left">
+             d:DesignHeight="50" d:DesignWidth="460">
+    <Grid Background="#FFF4F4F5" Width="440" Margin="0,0,0,10" HorizontalAlignment="Left">
         <TextBlock x:Name="Channel" HorizontalAlignment="Left" Margin="20,17,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock x:Name="Average1" HorizontalAlignment="Left" Margin="115,17,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock x:Name="Average2" HorizontalAlignment="Left" Margin="210,17,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock x:Name="STD" HorizontalAlignment="Left" Margin="295,17,-72,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="Total" HorizontalAlignment="Left" Margin="390,17,-72,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

@@ -17,7 +17,7 @@ namespace MyoAnalyzer.Classification.Extraceter
             _channelsToTrain = channelsToTrain;
         }
 
-        public double[][] ExtractFeatures(Pose poseRawData)
+        public double[][] ExtractFeaturesFromMany(Pose poseRawData)
         {
 
             var allRawData = poseRawData.TotalPoseData;
@@ -34,6 +34,36 @@ namespace MyoAnalyzer.Classification.Extraceter
 
             return model;
         }
+
+        public double[][] ExtractFeaturesFromSingle(List<int[]> pose1RawData)
+        {
+            double[][] model = new double[1][];
+
+            model[0] = new double[_channelsToTrain.Count(a => a)];
+
+            int dataTrained = 0;
+
+            for (int i = 0; i < _channelsToTrain.Length - 1; i++)
+            {
+
+                if (_channelsToTrain[i])
+                {
+                    foreach (var poseSet in pose1RawData)
+                    {
+                        model[0][dataTrained] += Math.Pow(poseSet[i], 2);
+                    }
+                    dataTrained++;
+                }
+            }
+
+            for (var j = 0; j < model[0].Length; j++)
+            {
+                model[0][j] = Math.Sqrt(model[0][j] / pose1RawData.Count);
+            }
+
+            return model;
+        }
+
 
         private double[] GetAverageEnergi(EmgTrainData poseSet)
         {

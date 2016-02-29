@@ -50,10 +50,9 @@
         <TextBlock x:Name="Live" HorizontalAlignment="Left" Height="19" Margin="634,280,0,0" TextWrapping="Wrap" Text="Live Classification" VerticalAlignment="Top" Width="103" FontWeight="Bold"/>
         <Button x:Name="PlotTestDataButton" Content="Plot Test" HorizontalAlignment="Left" Margin="619,58,0,0" VerticalAlignment="Top" Width="98" Height="36" FontWeight="Bold" Visibility="Hidden" Click="PlotTest_Click"/>
         <Button x:Name="GoLiveButton" Content="Go Live!" HorizontalAlignment="Left" Margin="631,308,0,0" VerticalAlignment="Top" Width="97" Height="33" FontWeight="Bold" Click="GoLive_Click"/>
-        <Button x:Name="AddNewGesture" Content="Add" HorizontalAlignment="Left" Margin="381,72,0,0" VerticalAlignment="Top" Width="43" Height="22" Click="AddGesture_Click"/>
-        <Button x:Name="CleanGestures" Content="Clean" HorizontalAlignment="Left" Margin="435,72,0,0" VerticalAlignment="Top" Width="43" Height="22" Click="CleanGestures_Click"/>
+        <Button x:Name="AddNewGesture" Content="Add" HorizontalAlignment="Left" Margin="390,72,0,0" VerticalAlignment="Top" Width="43" Height="22" Click="AddGesture_Click"/>
+        <Button x:Name="CleanGestures" Content="Clean" HorizontalAlignment="Left" Margin="438,72,0,0" VerticalAlignment="Top" Width="43" Height="22" Click="CleanGestures_Click"/>
         <StackPanel x:Name="GesturesPanel" HorizontalAlignment="Left" Height="257" Margin="249,102,0,0" VerticalAlignment="Top" Width="252"/>
-        <TextBox x:Name="GestureNameBox" HorizontalAlignment="Left" Height="22" Margin="256,72,0,0" TextWrapping="Wrap" Text="Name..." VerticalAlignment="Top" Width="120"/>
         <Separator HorizontalAlignment="Left" Height="5" Margin="256,45,0,0" VerticalAlignment="Top" Width="225"/>
         <TextBlock x:Name="NewPoseText" HorizontalAlignment="Left" Margin="256,51,0,0" TextWrapping="Wrap" Text="Add new Pose:" VerticalAlignment="Top"/>
         <Separator HorizontalAlignment="Left" Height="4" Margin="589,310,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.5,0.5">
@@ -68,6 +67,8 @@
         </Separator>
         <TextBlock x:Name="PreprocessingMenu" HorizontalAlignment="Left" Height="18" Margin="511,19,0,0" TextWrapping="Wrap" Text="Preprocessing Tools" VerticalAlignment="Top" Width="118" FontWeight="Bold"/>
         <Button x:Name="RankDataButton" Content="Rank Attributes"  HorizontalAlignment="Left" Margin="512,46,0,0" VerticalAlignment="Top" Width="93" Height="31" Click="RankAttributes_Click" Visibility="Hidden"/>
-        <Button x:Name="DigitalFilters_MenuButton" Content="Digital Filters"  HorizontalAlignment="Left" Margin="619,46,0,0" VerticalAlignment="Top" Width="93" Height="31"/>
+        <Button x:Name="DigitalFilters_MenuButton" Content="Correlation Menu"  HorizontalAlignment="Left" Margin="619,46,0,0" VerticalAlignment="Top" Width="109" Height="31"/>
+        <ComboBox x:Name="GesturesComboBox" HorizontalAlignment="Left" Margin="256,72,0,0" VerticalAlignment="Top" Width="120">
+        </ComboBox>
     </Grid>
 </Window>

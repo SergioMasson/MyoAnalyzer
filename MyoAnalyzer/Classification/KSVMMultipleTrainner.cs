@@ -6,12 +6,15 @@ using Accord.MachineLearning.VectorMachines.Learning;
 using Accord.Math;
 using Accord.Statistics.Kernels;
 using MyoAnalyzer.Classification;
+using MyoAnalyzer.Classification.Extraceter;
 
 namespace MyoAnalyzer.Classification
 {
     class KSVMMultipleTrainner : ITrainner
     {
         private MultilabelSupportVectorMachine SVM;
+
+        private IExtracter FeatureExtracter;
 
         private bool[] _channelsToTrain;
 
@@ -21,7 +24,7 @@ namespace MyoAnalyzer.Classification
 
         public KSVMMultipleTrainner()
         {
-            _isTrainned = false;
+            _isTrainned = false;           
         }
 
         public string Classify(List<int[]> rawData)
@@ -29,7 +32,9 @@ namespace MyoAnalyzer.Classification
             if (_channelsToTrain == null)
                 return "0";
 
-            var data = ExtractFeaturesFromSingleTry(rawData);
+            FeatureExtracter = new AverageEnergyExtracter(_channelsToTrain);
+
+            var data = FeatureExtracter.ExtractFeaturesFromSingle(rawData);
 
             int[][] answers = data.Apply(SVM.Compute);
 
@@ -67,11 +72,15 @@ namespace MyoAnalyzer.Classification
 
             _channelsToTrain = channelsToTrain;
 
+            FeatureExtracter = new AverageEnergyExtracter(_channelsToTrain);
+
             double trainnerComplexity = 500;
 
             int classifierSize = channelsToTrain.Count(a => a);
 
-            double[][] dataTraining = ExtractFeatures(poseRawData);
+            List<double[]> dataTraining = new List<double[]>();           
+
+            dataTraining = poseRawData.Select(pose => FeatureExtracter.ExtractFeaturesFromMany(pose)).Aggregate(dataTraining, (current, singlePoseData) => current.Concat(singlePoseData).ToList());
 
             int[][] totalOutput = GenerateOutputs(poseRawData);
             
@@ -79,7 +88,7 @@ namespace MyoAnalyzer.Classification
 
             SVM = new MultilabelSupportVectorMachine(classifierSize, kernel, poseRawData.Count);
 
-            var teacher = new MultilabelSupportVectorLearning(SVM, dataTraining, totalOutput);
+            var teacher = new MultilabelSupportVectorLearning(SVM, dataTraining.ToArray(), totalOutput);
 
             TryToOptimize(teacher, trainnerComplexity);           
            
@@ -122,84 +131,7 @@ namespace MyoAnalyzer.Classification
                 model[i] = poseRawData[i].GestureName;
             }
             return model;
-        }
-
-        private double[][] ExtractFeaturesFromSingleTry(List<int[]> pose1RawData)
-        {
-            double[][] model = new double[1][];
-
-            model[0] = new double[_channelsToTrain.Count(a => a)];
-
-            int dataTrained = 0;
-
-            for (int i = 0; i < _channelsToTrain.Length - 1; i++)
-            {
-              
-                if (_channelsToTrain[i])
-                {
-                    foreach (var poseSet in pose1RawData)
-                    {
-                        model[0][dataTrained] += Math.Pow(poseSet[i], 2);                       
-                    }
-                    dataTrained++;
-                }
-            }
-
-            for (var j = 0; j < model[0].Length; j++)
-            {
-                model[0][j] = Math.Sqrt(model[0][j] / pose1RawData.Count);
-            }           
-
-            return model;
-        }
-
-        private double[][] ExtractFeatures(List<Pose> poseRawData)
-        {
-
-            var allRawData = new List<EmgTrainData>();
-
-            foreach (Pose pose in poseRawData)
-            {
-                allRawData.AddRange(pose.TotalPoseData);
-            }          
-
-            double[][] model = new double[allRawData.Count][];
-
-            int i = 0;
-
-            foreach (var poseSet in allRawData)
-            {
-                model[i] = GetAverageEnergi(poseSet);
-                i++;
-            }
-
-            return model;
-        }
-
-        private double[] GetAverageEnergi(EmgTrainData poseSet)
-        {
-            double[] model = new double[_channelsToTrain.Count(a => a)];
-
-            foreach (var value in poseSet.AquisitionData)
-            {
-                int c = 0;
-                for (int i = 0; i < _channelsToTrain.Length; i++)
-                {
-                    if (_channelsToTrain[i])
-                    {
-                        model[c] = model[c] + Math.Pow(value[i], 2);
-                        c++;
-                    }
-                }
-            }
-
-            for (int j = 0; j < model.Length; j++)
-            {
-                model[j] = Math.Sqrt(model[j] / poseSet.AquisitionData.Count);
-            }
-
-            return model;
-        }
+        }                  
 
         public bool IsTrainned()
         {

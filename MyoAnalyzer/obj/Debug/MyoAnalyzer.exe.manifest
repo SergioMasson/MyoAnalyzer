@@ -150,14 +150,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="144864">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="145376">
       <assemblyIdentity name="MyoAnalyzer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FCFnrf2DxzMRQWmi9T+oG2Fd1FUaIoHWChYR/BZb3yk=</dsig:DigestValue>
+        <dsig:DigestValue>JG4VfKoT4T2/Pw0F8nZA2JTd8YSg1LG8FkebR3qNUKs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

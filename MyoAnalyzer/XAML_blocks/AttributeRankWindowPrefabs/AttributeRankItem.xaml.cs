@@ -20,13 +20,15 @@ namespace MyoAnalyzer.XAML_blocks.AttributeRankWindowPrefabs
     /// </summary>
     public partial class AttributeRankItem : UserControl
     {
-        public AttributeRankItem(string channel, double average1, double average2, double std)
+        public AttributeRankItem(string channel, double average1, double average2, double std, double totalpoints)
         {
             InitializeComponent();
             Channel.Text = channel;
             Average1.Text = average1.ToString("#.##", System.Globalization.CultureInfo.InvariantCulture); 
             Average2.Text = average2.ToString("#.##", System.Globalization.CultureInfo.InvariantCulture);
             STD.Text = std.ToString("#.##", System.Globalization.CultureInfo.InvariantCulture);
+            Total.Text = totalpoints.ToString("#.##", System.Globalization.CultureInfo.InvariantCulture);
+
         }
     }
 }

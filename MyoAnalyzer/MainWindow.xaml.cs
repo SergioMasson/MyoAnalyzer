@@ -46,6 +46,12 @@ namespace MyoAnalyzer
 
             _connectClick = new USBConnectInterface();
 
+            GesturesComboBox.Items.Add("Open");
+            GesturesComboBox.Items.Add("Close");
+            GesturesComboBox.Items.Add("Rock'n Roll");
+            GesturesComboBox.Items.Add("Like");
+            GesturesComboBox.Items.Add("One");
+
             Channel1CheckBox.DataContext = this;
             Channel2CheckBox.DataContext = this;
             Channel3CheckBox.DataContext = this;
@@ -318,7 +324,7 @@ namespace MyoAnalyzer
 
         private void AddGesture_Click(object sender, RoutedEventArgs e)
         {
-            XAML_blocks.GesturePanel newGesture = new XAML_blocks.GesturePanel(GestureNameBox.Text);
+            XAML_blocks.GesturePanel newGesture = new XAML_blocks.GesturePanel(GesturesComboBox.Items[GesturesComboBox.SelectedIndex].ToString());
 
             GesturesPanel.Children.Add(newGesture);
 

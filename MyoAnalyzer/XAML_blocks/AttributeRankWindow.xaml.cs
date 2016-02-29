@@ -81,13 +81,13 @@ namespace MyoAnalyzer.XAML_blocks
 
             FeatureRanker FeatureRanker = new FeatureRanker();
 
-            double[][] rawData1 = FeatureExtracter.ExtractFeatures(Poses.First());
+            double[][] rawData1 = FeatureExtracter.ExtractFeaturesFromMany(Poses.First());
 
-            double[][] rawData2 = FeatureExtracter.ExtractFeatures(Poses.Last());
+            double[][] rawData2 = FeatureExtracter.ExtractFeaturesFromMany(Poses.Last());
 
             foreach (var VARIABLE in FeatureRanker.RankFeatures(rawData1, rawData2, numberOfAttributes))
             {
-                AttributeRankItem AttributeRankItem = new AttributeRankItem(VARIABLE[0].ToString(), VARIABLE[1], VARIABLE[2], VARIABLE[3]);
+                AttributeRankItem AttributeRankItem = new AttributeRankItem(VARIABLE[0].ToString(), VARIABLE[1], VARIABLE[2], VARIABLE[3], VARIABLE[4]);
 
                 AtributeRankList.Add(AttributeRankItem);
             }

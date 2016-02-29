@@ -8,6 +8,8 @@ namespace MyoAnalyzer.Classification.Extraceter
 {
     interface IExtracter
     {
-        double[][] ExtractFeatures(Pose poseRawData);
+        double[][] ExtractFeaturesFromMany(Pose poseRawData);
+
+        double[][] ExtractFeaturesFromSingle(List<int[]> poseRawData);
     }
 }
