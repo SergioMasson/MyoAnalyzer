@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MyoAnalyzer
+namespace MyoAnalyzer.DataTypes
 {
     public class EmgTrainData
     {

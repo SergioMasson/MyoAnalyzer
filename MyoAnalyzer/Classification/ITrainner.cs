@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using MyoAnalyzer.DataTypes;
+using MyoAnalyzer.Enums;
 
 namespace MyoAnalyzer.Classification
 {
@@ -6,7 +8,7 @@ namespace MyoAnalyzer.Classification
     {
         double Train(List<Pose> pose1RawData, bool[] channelsToTrain);
 
-        string Classify(List<int[]> rawData);
+        Gestures Classify(List<int[]> rawData);
 
         void ResetTrain();
 

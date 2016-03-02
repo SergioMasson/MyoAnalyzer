@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MyoAnalyzer.Classification.Extraceter;
 using MyoAnalyzer.Classification.Ranker;
+using MyoAnalyzer.DataTypes;
 using MyoAnalyzer.XAML_blocks.AttributeRankWindowPrefabs;
 
 namespace MyoAnalyzer.XAML_blocks

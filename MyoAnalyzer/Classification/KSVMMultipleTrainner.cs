@@ -7,6 +7,8 @@ using Accord.Math;
 using Accord.Statistics.Kernels;
 using MyoAnalyzer.Classification;
 using MyoAnalyzer.Classification.Extraceter;
+using MyoAnalyzer.DataTypes;
+using MyoAnalyzer.Enums;
 
 namespace MyoAnalyzer.Classification
 {
@@ -27,10 +29,10 @@ namespace MyoAnalyzer.Classification
             _isTrainned = false;           
         }
 
-        public string Classify(List<int[]> rawData)
+        public Gestures Classify(List<int[]> rawData)
         {
             if (_channelsToTrain == null)
-                return "0";
+                return Gestures.None;
 
             FeatureExtracter = new AverageEnergyExtracter(_channelsToTrain);
 
@@ -38,9 +40,8 @@ namespace MyoAnalyzer.Classification
 
             int[][] answers = data.Apply(SVM.Compute);
 
-            string finalAnswer = GetLabelFromResult(answers[0]);
-            //return GetLabels[answers];
-            
+            Gestures finalAnswer = Common.PoseToString.First(a => a.Value == GetLabelFromResult(answers[0])).Key;
+            //return GetLabels[answers];            
             return finalAnswer;
 
         }
@@ -64,8 +65,7 @@ namespace MyoAnalyzer.Classification
             _isTrainned = false;
 
         }
-
-       
+      
         public double Train(List<Pose> poseRawData, bool[] channelsToTrain)
         {                     
             Labels = GetLabels(poseRawData);
@@ -128,7 +128,7 @@ namespace MyoAnalyzer.Classification
 
             for (int i = 0; i < poseRawData.Count; i++)
             {
-                model[i] = poseRawData[i].GestureName;
+                model[i] = Common.PoseToString[poseRawData[i].GestureName];
             }
             return model;
         }                  

@@ -6,6 +6,8 @@ using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
 using Accord.Math;
 using Accord.Statistics.Kernels;
+using MyoAnalyzer.DataTypes;
+using MyoAnalyzer.Enums;
 
 namespace MyoAnalyzer.Classification
 {
@@ -25,16 +27,16 @@ namespace MyoAnalyzer.Classification
             _isTrainned = false;
         }
 
-        public string Classify(List<int[]> rawData)
+        public Gestures Classify(List<int[]> rawData)
         {
             if (_channelsToTrain == null)
-                return "0";
+                return Gestures.None;
 
             var data = ExtractFeaturesFromSingleTry(rawData);
 
             var answers = data.Apply(SVM.Compute).Apply(Math.Sign);
 
-            return answers[0] == -1 ? label1 : label2;
+            return answers[0] == -1 ? Common.PoseToString.First(a => a.Value == label1).Key : Common.PoseToString.First(a => a.Value == label2).Key;
         }
 
         public void ResetTrain()
@@ -51,9 +53,9 @@ namespace MyoAnalyzer.Classification
 
             List<EmgTrainData> pose2RawData = poseRawData.Last().TotalPoseData;
 
-            label1 = poseRawData.First().GestureName;
+            label1 = Common.PoseToString[poseRawData.First().GestureName];
 
-            label2 = poseRawData.Last().GestureName;
+            label2 = Common.PoseToString[poseRawData.Last().GestureName];
 
             _channelsToTrain = channelsToTrain;
 

@@ -8,6 +8,8 @@ using Accord.Math;
 using Accord.Statistics.Kernels;
 using MyoAnalyzer.Classification.Extraceter;
 using MyoAnalyzer.Classification.Ranker;
+using MyoAnalyzer.DataTypes;
+using MyoAnalyzer.Enums;
 
 namespace MyoAnalyzer.Classification
 {
@@ -27,9 +29,9 @@ namespace MyoAnalyzer.Classification
             Ranker = new FeatureRanker();
         }
 
-        public string Classify(List<int[]> rawData)
+        public Gestures Classify(List<int[]> rawData)
         {
-            return string.Empty;
+            return Gestures.None;
         }
 
         public void ResetTrain()

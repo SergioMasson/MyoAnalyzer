@@ -94,9 +94,16 @@
       <HintPath>..\packages\Accord.Statistics.3.0.2\lib\net45\Accord.Statistics.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DynamicDataDisplay, Version=0.3.0.1, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicDataDisplay.0.3.0.1\lib\net45\DynamicDataDisplay.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Dynamic" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.DynamicData.Design" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -149,7 +156,7 @@
     <Compile Include="Classification\Rankers\FeatureRanker.cs" />
     <Compile Include="Classification\SMTrainner.cs" />
     <Compile Include="Common.cs" />
-    <Compile Include="DataClasses.cs" />
+    <Compile Include="DataTypes\DataClasses.cs" />
     <Compile Include="XAML_blocks\AttributeRankWindow.xaml.cs">
       <DependentUpon>AttributeRankWindow.xaml</DependentUpon>
     </Compile>
@@ -171,8 +178,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyoAnalyzerStates.cs" />
-    <Compile Include="Pose.cs" />
+    <Compile Include="Enums\MyoAnalyzerStates.cs" />
+    <Compile Include="DataTypes\Pose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -206,13 +213,13 @@
       <Project>{35d4330a-f09d-4c59-a591-05bca0777c27}</Project>
       <Name>ComunicadorSerial_Arduino</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DynamicPlotWPF\DynamicPlotWPF.csproj">
+      <Project>{3a8ff3e3-989f-45cb-b287-508409163a19}</Project>
+      <Name>DynamicPlotWPF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyoSharp\MyoSharp.csproj">
       <Project>{b075c7e9-fe48-4508-b44c-1a259bcc8b22}</Project>
       <Name>MyoSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PlotForm\PlotForm.csproj">
-      <Project>{e9848031-6e3f-40b6-b0bc-4ce921779abb}</Project>
-      <Name>PlotForm</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

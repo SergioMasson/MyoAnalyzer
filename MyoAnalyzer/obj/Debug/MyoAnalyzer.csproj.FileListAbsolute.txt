@@ -137,12 +137,10 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\Accord.
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\Accord.Statistics.dll
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\ComunicadorSerial_Arduino.exe
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\MyoSharp.dll
-C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\PlotForm.exe
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\ZedGraph.dll
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\Microsoft.Contracts.dll
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\ComunicadorSerial_Arduino.pdb
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\MyoSharp.pdb
-C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\PlotForm.pdb
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\Accord.xml
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\Accord.Controls.xml
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\Accord.IO.xml
@@ -187,3 +185,6 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_bl
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\AttributeRankWindow.baml
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\AttributeRankWindowPrefabs\AttributeRankItem.g.cs
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\AttributeRankWindowPrefabs\AttributeRankItem.baml
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\DynamicDataDisplay.dll
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\DynamicPlotWPF.exe
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\DynamicPlotWPF.pdb

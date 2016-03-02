@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MyoAnalyzer.Enums;
 
-namespace MyoAnalyzer
+namespace MyoAnalyzer.DataTypes
 {
     public class Pose
     {
-
         public Pose(string name)
         {
             TotalPoseData = new List<EmgTrainData>();
-            GestureName = name;
+            GestureName = Common.PoseToString.First(a => a.Value == name).Key;
             GestureCode = 0;
         }
-
         public List<EmgTrainData> TotalPoseData;
-        public string GestureName { get; set; }
+        public Gestures GestureName { get; set; }
         public int GestureCode { get; set; }
     }
 }

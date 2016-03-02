@@ -1,20 +1,22 @@
 ﻿using ComunicadorSerial_Arduino;
 using MyoSharp.Communication;
 using MyoSharp.Device;
-using PlotForm;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using DynamicPlotWPF;
 using MyoAnalyzer.Classification;
+using MyoAnalyzer.DataTypes;
+using MyoAnalyzer.Enums;
 using MyoAnalyzer.XAML_blocks;
 
 namespace MyoAnalyzer
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PlotDynamicWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
@@ -38,7 +40,11 @@ namespace MyoAnalyzer
         // Arduino
         private USBConnectInterface _connectClick;
 
+        private DynamicPlotWPF.PlotDynamicWindow RealTimeWindow;
+
         public bool[] ChannalsToTrain { get; set; }
+
+        private bool IsStraeming;
 
         public MainWindow()
         {
@@ -46,9 +52,11 @@ namespace MyoAnalyzer
 
             _connectClick = new USBConnectInterface();
 
+            IsStraeming = false;
+
             GesturesComboBox.Items.Add("Open");
             GesturesComboBox.Items.Add("Close");
-            GesturesComboBox.Items.Add("Rock'n Roll");
+            GesturesComboBox.Items.Add("Rock`n Roll");
             GesturesComboBox.Items.Add("Like");
             GesturesComboBox.Items.Add("One");
 
@@ -107,7 +115,7 @@ namespace MyoAnalyzer
             {
                 string data = "";
 
-                int[] datasColected = new int[9];
+                int[] datasColected = new int[9];               
 
                 // pull _dataColected from each sensor
                 for (var i = 0; i < NUMBER_OF_SENSORS; ++i)
@@ -118,9 +126,25 @@ namespace MyoAnalyzer
 
                 datasColected[8] = (int)(e.Timestamp - StartTime).TotalMilliseconds;
 
+                //TODO: Fazer interpolação
+                if (_dataColected.Count > 2)
+                {
+                    if (_dataColected?.Last()?[8] == datasColected[8])
+                        return;
+                }                   
+
+                if(IsStraeming)
+                    RealTimeWindow.UpdateGraph(datasColected[0], datasColected[8]);
+
                 _dataColected.Add(datasColected);
-                EmgDataToSave.Add(data + (int)(e.Timestamp - StartTime).TotalMilliseconds);
+                EmgDataToSave.Add(data + (int)(e.Timestamp - StartTime).TotalMilliseconds);             
+                   
             }
+
+            if (IsStraeming)
+            {
+                RealTimeWindow.UpdateGraph(e.EmgData.GetDataForSensor(1), (int)(e.Timestamp - StartTime).TotalMilliseconds);
+            }            
         }
 
         #endregion Myo EventHandlers
@@ -133,11 +157,9 @@ namespace MyoAnalyzer
             {
                 State = AppState.Waiting;
 
-                Plot PlotForm = new Plot();
+                StaticMultiLinesPlotWindow DataPlot = new StaticMultiLinesPlotWindow(_dataColected);
 
-                PlotForm.Show();
-
-                PlotForm.SendDataToPlot(_dataColected);
+                DataPlot.Show();
 
                 GetDataButton.Content = "Get Data";
 
@@ -235,7 +257,7 @@ namespace MyoAnalyzer
             State = AppState.Waiting;
             TestClassificationButton.Content = "Start Test";
 
-            string result = Trainner.Classify(_dataColected);
+            Gestures result = Trainner.Classify(_dataColected);
 
             DisplayText.Clear();
             DisplayText.AppendText("No USB device detected! But the result was: " + result);
@@ -243,14 +265,8 @@ namespace MyoAnalyzer
 
             DisplayText.AppendText("\n No USB device detected! But the result was: " + result);
 
-            if (result == "Aberta")
-            {
-                _connectClick.SendDataToUsb("2");
-            }
-            else
-            {
-                _connectClick.SendDataToUsb("1");
-            }
+            _connectClick.SendDataToUsb(((int)result).ToString());
+            
         }
 
         private void PlotTest_Click(object sender, RoutedEventArgs e)
@@ -338,6 +354,14 @@ namespace MyoAnalyzer
         {
             GesturesPanel.Children.Clear();
             RankDataButton.Visibility = Visibility.Hidden;
-        }       
+        }
+
+        private void StarLiveDataStreaming_Click(object sender, RoutedEventArgs e)
+        {
+            RealTimeWindow = new DynamicPlotWPF.PlotDynamicWindow();
+            RealTimeWindow.Show();
+
+            IsStraeming = true;
+        }
     }
 }
