@@ -37,7 +37,7 @@
             </Separator.RenderTransform>
         </Separator>
         <TextBlock x:Name="LiveTrainingMenu" HorizontalAlignment="Left" Height="19" Margin="506,280,0,0" TextWrapping="Wrap" Text="Classification Test" VerticalAlignment="Top" Width="111" FontWeight="Bold"/>
-        <Button x:Name="TestClassificationButton" Content="Start Test" HorizontalAlignment="Left" Margin="512,308,0,0" VerticalAlignment="Top" Width="97" Height="33" FontWeight="Bold" Click="TestClassification_Click"/>
+        <Button x:Name="TestClassificationButton" Content="Test Menu" HorizontalAlignment="Left" Margin="512,308,0,0" VerticalAlignment="Top" Width="97" Height="33" FontWeight="Bold" Click="TestClassification_Click"/>
         <TextBlock x:Name="ClassificationChannel" HorizontalAlignment="Left" Height="18" Margin="511,89,0,0" TextWrapping="Wrap" Text="Select Channels for classification:" VerticalAlignment="Top" Width="225" FontWeight="Bold"/>
         <CheckBox x:Name="Channel1CheckBox" Content="Channel 1" HorizontalAlignment="Left" Margin="511,118,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[0], Mode=TwoWay}"/>
         <CheckBox x:Name="Channel2CheckBox" Content="Channel 2" HorizontalAlignment="Left" Margin="511,138,0,0" VerticalAlignment="Top" IsChecked="{Binding ChannalsToTrain[1], Mode=TwoWay}"/>

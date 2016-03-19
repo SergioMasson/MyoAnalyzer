@@ -59,21 +59,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="RealTimePlot.xaml.cs">
+      <DependentUpon>RealTimePlot.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StaticMultiLinesPlotWindow.xaml.cs">
       <DependentUpon>StaticMultiLinesPlotWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="PlotDynamicWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PlotDynamicWindow.xaml.cs">
-      <DependentUpon>PlotDynamicWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="RealTimePlot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StaticMultiLinesPlotWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

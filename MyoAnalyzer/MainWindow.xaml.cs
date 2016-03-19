@@ -38,9 +38,7 @@ namespace MyoAnalyzer
         private ITrainner Trainner;
 
         // Arduino
-        private USBConnectInterface _connectClick;
-
-        private DynamicPlotWPF.PlotDynamicWindow RealTimeWindow;
+        private USBConnectInterface _connectClick;       
 
         public bool[] ChannalsToTrain { get; set; }
 
@@ -77,7 +75,17 @@ namespace MyoAnalyzer
             _dataColected = new List<int[]>();
 
             // get set up to listen for Myo events
-            _channel = Channel.Create(ChannelDriver.Create(ChannelBridge.Create()));
+
+            try
+            {
+                _channel = Channel.Create(ChannelDriver.Create(ChannelBridge.Create()));
+            }
+            catch (Exception e)
+            {
+                ErroMassege noMyoMassege = new ErroMassege("Myo Connect not found");
+                noMyoMassege.Show();
+                return;
+            }          
 
             _hub = Hub.Create(_channel);
             _hub.MyoConnected += Hub_MyoConnected;
@@ -131,20 +139,12 @@ namespace MyoAnalyzer
                 {
                     if (_dataColected?.Last()?[8] == datasColected[8])
                         return;
-                }                   
-
-                if(IsStraeming)
-                    RealTimeWindow.UpdateGraph(datasColected[0], datasColected[8]);
+                }              
 
                 _dataColected.Add(datasColected);
                 EmgDataToSave.Add(data + (int)(e.Timestamp - StartTime).TotalMilliseconds);             
                    
-            }
-
-            if (IsStraeming)
-            {
-                RealTimeWindow.UpdateGraph(e.EmgData.GetDataForSensor(1), (int)(e.Timestamp - StartTime).TotalMilliseconds);
-            }            
+            }                    
         }
 
         #endregion Myo EventHandlers
@@ -224,14 +224,7 @@ namespace MyoAnalyzer
         }
 
         private void TestClassification_Click(object sender, RoutedEventArgs e)
-        {
-            if (_hub.Myos.Count == 0)
-            {
-                XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n No Myo device found! please connect one and try again.");
-                error.Show();
-                return;
-            }
-
+        {         
             if (Trainner == null)
             {
                 XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n You need create a classificator first!");
@@ -246,27 +239,32 @@ namespace MyoAnalyzer
                 return;
             }
 
-            if (State != AppState.Acquiring)
-            {
-                _dataColected = new List<int[]>();
-                State = AppState.Acquiring;
-                TestClassificationButton.Content = " Finish ";
-                return;
-            }
+            ClassificationTestWindow testWindow = new ClassificationTestWindow(Trainner);
 
-            State = AppState.Waiting;
-            TestClassificationButton.Content = "Start Test";
+            testWindow.Show();
 
-            Gestures result = Trainner.Classify(_dataColected);
+            //if (State != AppState.Acquiring)
+            //{
+            //    _dataColected = new List<int[]>();
+            //    State = AppState.Acquiring;
+            //    TestClassificationButton.Content = " Finish ";
+            //    return;
+            //}
 
-            DisplayText.Clear();
-            DisplayText.AppendText("No USB device detected! But the result was: " + result);
-            DisplayText.ScrollToEnd();
+            //State = AppState.Waiting;
+            //TestClassificationButton.Content = "Start Test";
 
-            DisplayText.AppendText("\n No USB device detected! But the result was: " + result);
+            //Gestures result = Trainner.Classify(_dataColected);
 
-            _connectClick.SendDataToUsb(((int)result).ToString());
-            
+            //DisplayText.Clear();
+            //DisplayText.AppendText("No USB device detected! But the result was: " + result);
+            //DisplayText.ScrollToEnd();
+
+            //DisplayText.AppendText("\n No USB device detected! But the result was: " + result);
+
+            //_connectClick.SendDataToUsb(((int)result).ToString());
+
+
         }
 
         private void PlotTest_Click(object sender, RoutedEventArgs e)
@@ -311,6 +309,30 @@ namespace MyoAnalyzer
             RankWindow.Show();
         }
 
+        private void AddGesture_Click(object sender, RoutedEventArgs e)
+        {
+            XAML_blocks.GesturePanel newGesture = new XAML_blocks.GesturePanel(GesturesComboBox.Items[GesturesComboBox.SelectedIndex].ToString());
+
+            GesturesPanel.Children.Add(newGesture);
+
+            if (GesturesPanel.Children.Count > 1 && RankDataButton.Visibility == Visibility.Hidden)
+            {
+                RankDataButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void CleanGestures_Click(object sender, RoutedEventArgs e)
+        {
+            GesturesPanel.Children.Clear();
+            RankDataButton.Visibility = Visibility.Hidden;
+        }
+
+        private void StarLiveDataStreaming_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO:Implement this
+            IsStraeming = true;
+        }
+
         #endregion ButtonClicks
 
         private void TrainMethodChanges(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -337,31 +359,6 @@ namespace MyoAnalyzer
                     break;
             }
         }
-
-        private void AddGesture_Click(object sender, RoutedEventArgs e)
-        {
-            XAML_blocks.GesturePanel newGesture = new XAML_blocks.GesturePanel(GesturesComboBox.Items[GesturesComboBox.SelectedIndex].ToString());
-
-            GesturesPanel.Children.Add(newGesture);
-
-            if (GesturesPanel.Children.Count > 1 && RankDataButton.Visibility == Visibility.Hidden)
-            {
-                RankDataButton.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void CleanGestures_Click(object sender, RoutedEventArgs e)
-        {
-            GesturesPanel.Children.Clear();
-            RankDataButton.Visibility = Visibility.Hidden;
-        }
-
-        private void StarLiveDataStreaming_Click(object sender, RoutedEventArgs e)
-        {
-            RealTimeWindow = new DynamicPlotWPF.PlotDynamicWindow();
-            RealTimeWindow.Show();
-
-            IsStraeming = true;
-        }
+      
     }
 }

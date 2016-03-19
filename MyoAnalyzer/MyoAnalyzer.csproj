@@ -135,6 +135,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="XAML_blocks\ClassificationTestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="XAML_blocks\ErroMassege.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,6 +166,9 @@
     </Compile>
     <Compile Include="XAML_blocks\AttributeRankWindowPrefabs\AttributeRankItem.xaml.cs">
       <DependentUpon>AttributeRankItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XAML_blocks\ClassificationTestWindow.xaml.cs">
+      <DependentUpon>ClassificationTestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="XAML_blocks\ErroMassege.xaml.cs">
       <DependentUpon>ErroMassege.xaml</DependentUpon>

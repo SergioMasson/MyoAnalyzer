@@ -4,7 +4,7 @@ using MyoAnalyzer.Enums;
 
 namespace MyoAnalyzer.Classification
 {
-    interface ITrainner
+    public interface ITrainner
     {
         double Train(List<Pose> pose1RawData, bool[] channelsToTrain);
 

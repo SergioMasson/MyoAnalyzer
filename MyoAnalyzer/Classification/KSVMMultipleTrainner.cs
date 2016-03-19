@@ -63,7 +63,6 @@ namespace MyoAnalyzer.Classification
             SVM = null;
             _channelsToTrain = null;
             _isTrainned = false;
-
         }
       
         public double Train(List<Pose> poseRawData, bool[] channelsToTrain)

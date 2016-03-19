@@ -150,14 +150,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DynamicPlotWPF.exe" size="11776">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DynamicPlotWPF.exe" size="19968">
       <assemblyIdentity name="DynamicPlotWPF" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>naa4WHmW+oU6Tja2yeEm7H6EMf0IlOMoY14dzAHwuyU=</dsig:DigestValue>
+        <dsig:DigestValue>K6bmUbghr5VauYCYDummBUxanl7KSrszGnFbf7xl5iI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -174,14 +174,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="146912">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="150496">
       <assemblyIdentity name="MyoAnalyzer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>gsF+AEOJmaeR73Nmo0RR4gwo1Ws5AkkiIODypQfbCro=</dsig:DigestValue>
+        <dsig:DigestValue>qXHBHro4cBv1ffKHideatJx1TGZSL0HyoFg+M8F00zg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -194,18 +194,6 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
         <dsig:DigestValue>hs3nHeyEXtgFKuYSy5GjFTD7Xqsf5Gv/638SdbxbKk4=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PlotForm.exe" size="9728">
-      <assemblyIdentity name="PlotForm" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ykXaoaab2O1prV+bkOaQ2TCPFy3S7QspzE3CNjGwrSY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

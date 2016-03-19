@@ -5,11 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyoAnalyzer.XAML_blocks"
         mc:Ignorable="d"
-        Title="Attribute Rank Window" Width="460" Height="Auto" SizeToContent="WidthAndHeight" Background="#FFDED8D8"  Icon="../Resources/logo.ico" ResizeMode="NoResize">
+        Title="Attribute Rank Window" Width="460" Height="Auto" SizeToContent="WidthAndHeight" Background="#FFDED8D8"  Icon="../Resources/logo.ico" ResizeMode="NoResize" Loaded="RankWindow_Loaded">
     <Grid>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="272" Text="Choose the number of attributes you wold like to use in your classification method. Our algoriths will indicate de best one to use !"/>
-        <TextBox x:Name="NumberOfAttributes" HorizontalAlignment="Left" Height="23" Margin="10,67,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Rank_Button" Content="Rank Attributes!" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" Width="207" Height="23" Click="RankAttributes_Click"/>
         <TextBlock x:Name="ChannelNumber" HorizontalAlignment="Left" Margin="20,128,0,0" TextWrapping="Wrap" Text="Channel" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBlock x:Name="Channel1Average" HorizontalAlignment="Left" Margin="115,128,0,0" TextWrapping="Wrap" Text="Average" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBlock x:Name="Channel2Average" HorizontalAlignment="Left" Margin="210,128,0,0" TextWrapping="Wrap" Text="Average" VerticalAlignment="Top" FontWeight="Bold"/>

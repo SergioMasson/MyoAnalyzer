@@ -13,15 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Research.DynamicDataDisplay;
 using Microsoft.Research.DynamicDataDisplay.DataSources;
-using Microsoft.Research.DynamicDataDisplay.PointMarkers;
 
 namespace DynamicPlotWPF
 {
     /// <summary>
-    /// Interaction logic for StaticMultiLinesPlotWindow.xaml
+    /// Interaction logic for DynamicDataPlotWindow.xaml
     /// </summary>
-    public partial class StaticMultiLinesPlotWindow : Window
+    public partial class DynamicDataPlotWindow : Window
     {
+
         private List<int[]> Signal;
 
         private int[] TimeStamp;
@@ -40,47 +40,11 @@ namespace DynamicPlotWPF
             Brushes.MediumPurple
         };
 
-        public StaticMultiLinesPlotWindow(List<int[]> signal)
+        public DynamicDataPlotWindow(List<int[]> signal)
         {
             Signal = signal;
-            TimeStamp = signal.Select( a => a[NUMBER_OF_SENSORS]).ToArray();
+            TimeStamp = signal.Select(a => a[NUMBER_OF_SENSORS]).ToArray();
             InitializeComponent();
-        }
-
-        private void StaticPlotWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            PlotDataFrom();
-        }
-
-        private void IndividualPlot_Click(object sender, RoutedEventArgs e)
-        {
-            int[] sensorNumber;
-
-            int individualSensor;
-
-            if (int.TryParse(NumberOfSensoresTextBox.Text, out individualSensor))
-            {
-                sensorNumber = new[] {individualSensor};
-                PlotSingleItemData(sensorNumber);
-                return;
-            }               
-
-            try
-            {
-                char[] separators = {' ', ';', ','};
-                sensorNumber = NumberOfSensoresTextBox.Text.Split(separators).Select(n => Convert.ToInt32(n)).ToArray();
-            }
-            catch (Exception exeption)
-            {
-                return;
-            }
-
-            PlotSingleItemData(sensorNumber);
-        }
-
-        private void PlotAll_Click(object sender, RoutedEventArgs e)
-        {
-            PlotDataFrom();
         }
 
         private void PlotDataFrom()
@@ -126,7 +90,7 @@ namespace DynamicPlotWPF
                     return;
 
                 int sensorNumber = fakeSensorNumber - 1;
-                                            
+
                 int[] dataToPlot = Signal.Select(a => a[sensorNumber]).ToArray();
 
                 var numberOpenDataSource = new EnumerableDataSource<int>(dataToPlot);
@@ -134,7 +98,7 @@ namespace DynamicPlotWPF
 
                 CompositeDataSource compositeDataSource1 = new CompositeDataSource(timeAxisVariable, numberOpenDataSource);
 
-                SignalPlot.AddLineGraph(compositeDataSource1, new Pen(ColourBrush[sensorNumber], 1), new PenDescription("Sensor " + fakeSensorNumber));               
+                SignalPlot.AddLineGraph(compositeDataSource1, new Pen(ColourBrush[sensorNumber], 1), new PenDescription("Sensor " + fakeSensorNumber));
             }
 
             SignalPlot.Legend.Background = Brushes.Black;
@@ -143,9 +107,49 @@ namespace DynamicPlotWPF
 
         }
 
+        #region Clicks
+
+        private void DynamicPlot_Loaded(object sender, RoutedEventArgs e)
+        {
+            PlotDataFrom();
+        }
+
+
+        #endregion
+
+        private void IndividualPlot_Click(object sender, RoutedEventArgs e)
+        {
+            int[] sensorNumber;
+
+            int individualSensor;
+
+            if (int.TryParse(NumberOfSensoresTextBox.Text, out individualSensor))
+            {
+                sensorNumber = new[] { individualSensor };
+                PlotSingleItemData(sensorNumber);
+                return;
+            }
+
+            try
+            {
+                char[] separators = { ' ', ';', ',' };
+                sensorNumber = NumberOfSensoresTextBox.Text.Split(separators).Select(n => Convert.ToInt32(n)).ToArray();
+            }
+            catch (Exception exeption)
+            {
+                return;
+            }
+
+            PlotSingleItemData(sensorNumber);
+        }
+
+        private void AllSensorsPlot_Click(object sender, RoutedEventArgs e)
+        {
+            PlotDataFrom();
+        }
+
         private void HideGrid_Click(object sender, RoutedEventArgs e)
         {
-
             if (SignalPlot.AxisGrid.IsVisible)
             {
                 SignalPlot.AxisGrid.Visibility = Visibility.Hidden;
@@ -155,12 +159,6 @@ namespace DynamicPlotWPF
 
             SignalPlot.AxisGrid.Visibility = Visibility.Visible;
             IndividualPlotButton.Content = "Hide Grids";
-
-        }
-
-        private void SensorNumber_Click(object sender, MouseButtonEventArgs e)
-        {
-            NumberOfSensoresTextBox.Text = "";
         }
     }
 }

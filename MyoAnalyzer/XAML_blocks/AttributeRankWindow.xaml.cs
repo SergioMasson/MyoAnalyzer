@@ -26,6 +26,8 @@ namespace MyoAnalyzer.XAML_blocks
         private List<Pose> Poses;
 
         private IExtracter FeatureExtracter;
+
+        private const int SENSORS_NUMBER = 8;
         
 
         public AttributeRankWindow(List<Pose> poses)
@@ -36,45 +38,7 @@ namespace MyoAnalyzer.XAML_blocks
             Channel1Average.Text = "Average " + poses.First().GestureName;
             Channel2Average.Text = "Average " + poses.Last().GestureName;
             Poses = poses;
-        }
-
-        private void RankAttributes_Click(object sender, RoutedEventArgs e)
-        {
-
-            AttributesPannel.Children.Clear();
-
-            if (string.IsNullOrEmpty(NumberOfAttributes.Text))
-            {
-                return;
-            }
-
-            try
-            {
-                var numberOfAttributes = 0;
-
-                if (!int.TryParse(NumberOfAttributes.Text, out numberOfAttributes))
-                {
-                    ErroMassege.Visibility = Visibility.Visible;
-                    return;
-                }
-
-                ErroMassege.Visibility = Visibility.Hidden;
-
-                List<AttributeRankItem> rankedAttributes = RankAttributes(numberOfAttributes);
-
-                foreach (var rankItem in rankedAttributes)
-                {
-                    AttributesPannel.Children.Add(rankItem);
-                }
-             
-            }
-            catch (FormatException exception)
-            {
-                ErroMassege.Visibility = Visibility.Visible;
-                return;
-            }
-
-        }
+        }       
 
         private List<AttributeRankItem> RankAttributes(int numberOfAttributes)
         {
@@ -95,7 +59,16 @@ namespace MyoAnalyzer.XAML_blocks
 
             return AtributeRankList;
 
+        }
 
-        }        
+        private void RankWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<AttributeRankItem> rankedAttributes = RankAttributes(SENSORS_NUMBER);
+
+            foreach (var rankItem in rankedAttributes)
+            {
+                AttributesPannel.Children.Add(rankItem);
+            }
+        }
     }
 }

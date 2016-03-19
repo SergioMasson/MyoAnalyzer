@@ -188,3 +188,5 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_bl
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\DynamicDataDisplay.dll
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\DynamicPlotWPF.exe
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\DynamicPlotWPF.pdb
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\ClassificationTestWindow.g.cs
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\ClassificationTestWindow.baml
