@@ -46,6 +46,11 @@ namespace MyoAnalyzer.Classification
 
         }
 
+        public Gestures Classify(EmgTrainData rawData)
+        {
+            throw new NotImplementedException();
+        }
+
         private string GetLabelFromResult(int[] answers)
         {
             for (int i = 0; i < answers.Length; i++)

@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Accord.Controls;
+﻿using Accord.Controls;
 using Accord.MachineLearning.VectorMachines;
 using Accord.MachineLearning.VectorMachines.Learning;
 using Accord.Math;
 using Accord.Statistics.Kernels;
 using MyoAnalyzer.DataTypes;
 using MyoAnalyzer.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MyoAnalyzer.Classification
 {
-    class KSVMTrainner : ITrainner
+    internal class KSVMTrainner : ITrainner
     {
         private KernelSupportVectorMachine SVM;
 
@@ -39,12 +39,16 @@ namespace MyoAnalyzer.Classification
             return answers[0] == -1 ? Common.PoseToString.First(a => a.Value == label1).Key : Common.PoseToString.First(a => a.Value == label2).Key;
         }
 
+        public Gestures Classify(EmgTrainData rawData)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ResetTrain()
         {
             SVM = null;
             _channelsToTrain = null;
             _isTrainned = false;
-
         }
 
         public double Train(List<Pose> poseRawData, bool[] channelsToTrain)
@@ -82,7 +86,7 @@ namespace MyoAnalyzer.Classification
             };
 
             // Teach the vector machine
-            double error = teacher.Run()*100;
+            double error = teacher.Run() * 100;
 
             // Classify the samples using the model
             int[] answers = dataTraining.Apply(SVM.Compute).Apply(Math.Sign);
@@ -91,7 +95,7 @@ namespace MyoAnalyzer.Classification
 
             // Plot the results
             if (classifierSize != 2)
-            {                
+            {
                 return error;
             }
 
@@ -99,7 +103,6 @@ namespace MyoAnalyzer.Classification
             ScatterplotBox.Show("GaussianSVM results", dataTraining, answers);
 
             return error;
-
         }
 
         private double[][] ExtractFeaturesFromSingleTry(List<int[]> pose1RawData)
@@ -112,12 +115,11 @@ namespace MyoAnalyzer.Classification
 
             for (int i = 0; i < _channelsToTrain.Length - 1; i++)
             {
-              
                 if (_channelsToTrain[i])
                 {
                     foreach (var poseSet in pose1RawData)
                     {
-                        model[0][dataTrained] += Math.Pow(poseSet[i], 2);                       
+                        model[0][dataTrained] += Math.Pow(poseSet[i], 2);
                     }
                     dataTrained++;
                 }
@@ -126,7 +128,7 @@ namespace MyoAnalyzer.Classification
             for (var j = 0; j < model[0].Length; j++)
             {
                 model[0][j] = Math.Sqrt(model[0][j] / pose1RawData.Count);
-            }           
+            }
 
             return model;
         }

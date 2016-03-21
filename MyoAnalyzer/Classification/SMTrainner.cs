@@ -34,6 +34,11 @@ namespace MyoAnalyzer.Classification
             return Gestures.None;
         }
 
+        public Gestures Classify(EmgTrainData rawData)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ResetTrain()
         {          
             _channelsToTrain = null;

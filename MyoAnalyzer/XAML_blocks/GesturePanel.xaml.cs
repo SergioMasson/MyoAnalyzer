@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using MyoAnalyzer.DataTypes;
+using MyoAnalyzer.Enums;
 
 namespace MyoAnalyzer.XAML_blocks
 {
@@ -21,6 +22,15 @@ namespace MyoAnalyzer.XAML_blocks
             Pose = new Pose(poseName);
 
             this.PoseName.Text = poseName;           
+        }
+
+        public GesturePanel(Gestures poseName)
+        {
+            InitializeComponent();
+
+            Pose = new Pose(poseName);
+
+            this.PoseName.Text = poseName.ToString();
         }
 
         private void LoadPoseData_Click(object sender, RoutedEventArgs e)
@@ -71,11 +81,18 @@ namespace MyoAnalyzer.XAML_blocks
         private void CleanGestureData_Click(object sender, RoutedEventArgs e)
         {
             Pose.TotalPoseData = new List<EmgTrainData>();
+
+            NumberPose1Samples.Text = "0";
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        public void CleanGestureData()
+        {
+            Pose.TotalPoseData = new List<EmgTrainData>();
         }
     }
 }

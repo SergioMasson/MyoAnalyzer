@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyoAnalyzer.XAML_blocks"
         mc:Ignorable="d"
-        Title="Attribute Rank Window" Width="460" Height="Auto" SizeToContent="WidthAndHeight" Background="#FFDED8D8"  Icon="../Resources/logo.ico" ResizeMode="NoResize" Loaded="RankWindow_Loaded">
+        Title="Rank Window" Width="460" Height="Auto" SizeToContent="WidthAndHeight" Background="#FFDED8D8"  Icon="../Resources/logo.ico" ResizeMode="NoResize" Loaded="RankWindow_Loaded">
     <Grid>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="52" Width="272" Text="Choose the number of attributes you wold like to use in your classification method. Our algoriths will indicate de best one to use !"/>
         <TextBlock x:Name="ChannelNumber" HorizontalAlignment="Left" Margin="20,128,0,0" TextWrapping="Wrap" Text="Channel" VerticalAlignment="Top" FontWeight="Bold"/>

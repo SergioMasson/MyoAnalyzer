@@ -12,6 +12,14 @@ namespace MyoAnalyzer.DataTypes
             GestureName = Common.PoseToString.First(a => a.Value == name).Key;
             GestureCode = 0;
         }
+
+        public Pose(Gestures name)
+        {
+            TotalPoseData = new List<EmgTrainData>();
+            GestureName = name;
+            GestureCode = 0;
+        }
+
         public List<EmgTrainData> TotalPoseData;
         public Gestures GestureName { get; set; }
         public int GestureCode { get; set; }

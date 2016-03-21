@@ -157,6 +157,7 @@
     </Compile>
     <Compile Include="Classification\Extraceter\AverageEnergyExtracter.cs" />
     <Compile Include="Classification\Extraceter\IExtracter.cs" />
+    <Compile Include="Classification\KVizinhosTrainner.cs" />
     <Compile Include="Classification\Rankers\FeatureRanker.cs" />
     <Compile Include="Classification\SMTrainner.cs" />
     <Compile Include="Common.cs" />

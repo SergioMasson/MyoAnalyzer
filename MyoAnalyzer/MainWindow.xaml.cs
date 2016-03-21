@@ -1,4 +1,9 @@
 ﻿using ComunicadorSerial_Arduino;
+using DynamicPlotWPF;
+using MyoAnalyzer.Classification;
+using MyoAnalyzer.DataTypes;
+using MyoAnalyzer.Enums;
+using MyoAnalyzer.XAML_blocks;
 using MyoSharp.Communication;
 using MyoSharp.Device;
 using System;
@@ -7,11 +12,6 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using DynamicPlotWPF;
-using MyoAnalyzer.Classification;
-using MyoAnalyzer.DataTypes;
-using MyoAnalyzer.Enums;
-using MyoAnalyzer.XAML_blocks;
 
 namespace MyoAnalyzer
 {
@@ -38,19 +38,15 @@ namespace MyoAnalyzer
         private ITrainner Trainner;
 
         // Arduino
-        private USBConnectInterface _connectClick;       
+        private USBConnectInterface _connectClick;
 
         public bool[] ChannalsToTrain { get; set; }
-
-        private bool IsStraeming;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _connectClick = new USBConnectInterface();
-
-            IsStraeming = false;
+            _connectClick = new USBConnectInterface();           
 
             GesturesComboBox.Items.Add("Open");
             GesturesComboBox.Items.Add("Close");
@@ -69,6 +65,11 @@ namespace MyoAnalyzer
 
             ChannalsToTrain = new bool[8];
 
+            for (int i = 0; i < ChannalsToTrain.Length; i++)
+            {
+                ChannalsToTrain[i] = true;
+            }
+
             State = AppState.Started;
             EmgDataToSave = new List<string>();
 
@@ -85,7 +86,7 @@ namespace MyoAnalyzer
                 ErroMassege noMyoMassege = new ErroMassege("Myo Connect not found");
                 noMyoMassege.Show();
                 return;
-            }          
+            }
 
             _hub = Hub.Create(_channel);
             _hub.MyoConnected += Hub_MyoConnected;
@@ -119,32 +120,33 @@ namespace MyoAnalyzer
 
         private void Myo_EmgDataAcquired(object sender, EmgDataEventArgs e)
         {
-            if (State == AppState.Acquiring)
+            if (State != AppState.Acquiring)
             {
-                string data = "";
+                return;
+            }
 
-                int[] datasColected = new int[9];               
+            string data = "";
 
-                // pull _dataColected from each sensor
-                for (var i = 0; i < NUMBER_OF_SENSORS; ++i)
-                {
-                    datasColected[i] = e.EmgData.GetDataForSensor(i);
-                    data = data + e.EmgData.GetDataForSensor(i) + " \t ";
-                }
+            int[] datasColected = new int[9];
 
-                datasColected[8] = (int)(e.Timestamp - StartTime).TotalMilliseconds;
+            // pull _dataColected from each sensor
+            for (var i = 0; i < NUMBER_OF_SENSORS; ++i)
+            {
+                datasColected[i] = e.EmgData.GetDataForSensor(i);
+                data = data + e.EmgData.GetDataForSensor(i) + " \t ";
+            }
 
-                //TODO: Fazer interpolação
-                if (_dataColected.Count > 2)
-                {
-                    if (_dataColected?.Last()?[8] == datasColected[8])
-                        return;
-                }              
+            datasColected[8] = (int)(e.Timestamp - StartTime).TotalMilliseconds;
 
-                _dataColected.Add(datasColected);
-                EmgDataToSave.Add(data + (int)(e.Timestamp - StartTime).TotalMilliseconds);             
-                   
-            }                    
+            //TODO: Fazer interpolação
+            if (_dataColected.Count > 2)
+            {
+                if (_dataColected?.Last()?[8] == datasColected[8])
+                    return;
+            }
+
+            _dataColected.Add(datasColected);
+            EmgDataToSave.Add(data + (int)(e.Timestamp - StartTime).TotalMilliseconds);
         }
 
         #endregion Myo EventHandlers
@@ -157,9 +159,9 @@ namespace MyoAnalyzer
             {
                 State = AppState.Waiting;
 
-                StaticMultiLinesPlotWindow DataPlot = new StaticMultiLinesPlotWindow(_dataColected);
+                StaticMultiLinesPlotWindow dataPlot = new StaticMultiLinesPlotWindow(_dataColected);
 
-                DataPlot.Show();
+                dataPlot.Show();
 
                 GetDataButton.Content = "Get Data";
 
@@ -208,11 +210,11 @@ namespace MyoAnalyzer
         {
             List<Pose> posesToTrain = (from XAML_blocks.GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
 
-            Trainner = new KSVMMultipleTrainner();
+            Trainner = new KVizinhosTrainner();
 
             var error = Trainner.Train(posesToTrain, ChannalsToTrain);
 
-            DisplayText.AppendText("\nTrainning sucsseded! The total error for your classification was:" + error + " % ");
+            DisplayText.AppendText("\nTrainning sucsseded! The total error for your classification was: " + error + " % ");
             DisplayText.ScrollToEnd();
         }
 
@@ -224,7 +226,7 @@ namespace MyoAnalyzer
         }
 
         private void TestClassification_Click(object sender, RoutedEventArgs e)
-        {         
+        {
             if (Trainner == null)
             {
                 XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n You need create a classificator first!");
@@ -239,32 +241,11 @@ namespace MyoAnalyzer
                 return;
             }
 
-            ClassificationTestWindow testWindow = new ClassificationTestWindow(Trainner);
+            List<Pose> posesToTrain = (from XAML_blocks.GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
+
+            ClassificationTestWindow testWindow = new ClassificationTestWindow(Trainner, posesToTrain);
 
             testWindow.Show();
-
-            //if (State != AppState.Acquiring)
-            //{
-            //    _dataColected = new List<int[]>();
-            //    State = AppState.Acquiring;
-            //    TestClassificationButton.Content = " Finish ";
-            //    return;
-            //}
-
-            //State = AppState.Waiting;
-            //TestClassificationButton.Content = "Start Test";
-
-            //Gestures result = Trainner.Classify(_dataColected);
-
-            //DisplayText.Clear();
-            //DisplayText.AppendText("No USB device detected! But the result was: " + result);
-            //DisplayText.ScrollToEnd();
-
-            //DisplayText.AppendText("\n No USB device detected! But the result was: " + result);
-
-            //_connectClick.SendDataToUsb(((int)result).ToString());
-
-
         }
 
         private void PlotTest_Click(object sender, RoutedEventArgs e)
@@ -296,9 +277,19 @@ namespace MyoAnalyzer
             {
                 _dataColected = new List<int[]>();
                 State = AppState.Acquiring;
-                TestClassificationButton.Content = " Finish ";
+                StartTime = DateTime.UtcNow;
+                GoLiveButton.Content = "Finish";
                 return;
             }
+
+            string result = Trainner.Classify(_dataColected).ToString();
+
+            DisplayText.AppendText("\n You just did a " + result);
+            DisplayText.ScrollToEnd();
+
+            GoLiveButton.Content = "Go Live";
+
+            State = AppState.Waiting;
         }
 
         private void RankAttributes_Click(object sender, RoutedEventArgs e)
@@ -328,9 +319,8 @@ namespace MyoAnalyzer
         }
 
         private void StarLiveDataStreaming_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO:Implement this
-            IsStraeming = true;
+        {          
+
         }
 
         #endregion ButtonClicks
@@ -359,6 +349,5 @@ namespace MyoAnalyzer
                     break;
             }
         }
-      
     }
 }

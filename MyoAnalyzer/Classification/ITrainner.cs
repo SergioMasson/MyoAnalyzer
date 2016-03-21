@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using MyoAnalyzer.DataTypes;
+﻿using MyoAnalyzer.DataTypes;
 using MyoAnalyzer.Enums;
+using System.Collections.Generic;
 
 namespace MyoAnalyzer.Classification
 {
@@ -10,9 +10,10 @@ namespace MyoAnalyzer.Classification
 
         Gestures Classify(List<int[]> rawData);
 
+        Gestures Classify(EmgTrainData rawData);
+
         void ResetTrain();
 
         bool IsTrainned();
     }
-
 }
