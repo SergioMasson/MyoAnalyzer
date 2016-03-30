@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using Accord.Math;
 using MyoAnalyzer.Classification;
 using MyoAnalyzer.DataTypes;
 using MyoAnalyzer.Enums;
-
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Windows;
 
 namespace MyoAnalyzer.XAML_blocks
 {
@@ -24,23 +15,38 @@ namespace MyoAnalyzer.XAML_blocks
     /// </summary>
     public partial class ClassificationTestWindow : Window
     {
-
         public ITrainner Trainner;
 
-        private List<Pose> Poses;
+        private readonly List<Pose> Poses;
 
-        private List<string> Report; 
+        private readonly List<string> Report;       
+
+        private readonly Gestures[] GestureList;
+
+        private double[][] ConfusionMatrixData;
+
+        private int N;
 
         public ClassificationTestWindow(ITrainner trainner, List<Pose> gestures)
         {
             Trainner = trainner;
+
+            N = gestures.Count;
+
+            ConfusionMatrixData = new double[N][];
+            GestureList = new Gestures[N];
+
+            for (int i = 0; i < N; i++)
+            {
+                ConfusionMatrixData[i] = new double[N];
+                GestureList[i] = gestures[i].GestureName;
+            }
 
             Poses = gestures;
 
             Report = new List<string>();
 
             InitializeComponent();
-            
         }
 
         private void ClassificationWindow_Loaded(object sender, RoutedEventArgs e)
@@ -50,15 +56,21 @@ namespace MyoAnalyzer.XAML_blocks
                 XAML_blocks.GesturePanel newGesture = new XAML_blocks.GesturePanel(gesture.GestureName);
 
                 PosePanel.Children.Add(newGesture);
-            }         
+            }
         }
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
             double rightGuess = 0;
+            int totalGuess = 0;
+            int rowNumber = 0;
 
-            double TotalGuess = 0;
+            ConfusionMatrixData = new double[N][];
 
+            for (int i = 0; i < N; i++)
+            {
+                ConfusionMatrixData[i] = new double[N];
+            }
 
             Report.Add("--------- Test Report --------------");
             Report.Add(" \n Number \t Original Pose \t Output Pose");
@@ -67,22 +79,37 @@ namespace MyoAnalyzer.XAML_blocks
 
             foreach (var pose in totalPoses)
             {
+                double totalRowGuest = 0;
+
                 foreach (var emgData in pose.TotalPoseData)
                 {
-                    TotalGuess++;                   
+                    totalGuess++;
+                    totalRowGuest++;
+
                     var outPutGesture = Trainner.Classify(emgData);
+
                     if (outPutGesture == pose.GestureName)
                     {
                         rightGuess++;
-                    }                     
-                    string reportLine = TotalGuess + "\t" + pose.GestureName.ToString() + "\t" + outPutGesture;
+                    }
+
+                    var index = GestureList.IndexOf(outPutGesture);
+
+                    ConfusionMatrixData[rowNumber][index]++;
+
+                    string reportLine = totalGuess + "\t" + pose.GestureName.ToString() + "\t" + outPutGesture;
                     Report.Add(reportLine);
-                }             
+                }
+
+                NormalizeRow(ConfusionMatrixData[rowNumber], totalRowGuest);
+
+                rowNumber++;
             }
 
-            ResultsWindowTextBox.AppendText("\n Test sucessed! Your classifyer scored : " + rightGuess + " / " + TotalGuess);
+            ResultsWindowTextBox.AppendText("\n Test sucessed! Your classifyer scored : " + rightGuess + " / " + totalGuess);
 
             SaveButton.Visibility = Visibility.Visible;
+            ConfusionButton.Visibility = Visibility.Visible;
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -97,6 +124,54 @@ namespace MyoAnalyzer.XAML_blocks
                 Report.RemoveDuplicates(writer);
                 writer.Dispose();
                 writer.Close();
+            }
+        }
+
+        private void Confusion_Click(object sender, RoutedEventArgs e)
+        {
+            ConfusionGrid.Visibility = Visibility.Visible;
+
+            int column = 0;
+            int row = 0;
+
+            DataSet data = new DataSet();
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("#");
+
+            foreach (var pose in Poses)
+            {
+                dt.Columns.Add(pose.GestureName.ToString());
+            }
+
+            foreach (var pose in Poses)
+            {
+                row = Poses.IndexOf(pose);
+
+                DataRow dr = dt.NewRow();
+
+                dr[0] = pose.GestureName.ToString();
+
+                foreach (var newpose in Poses)
+                {
+                    column = Poses.IndexOf(newpose);
+
+                    dr[column + 1] = ConfusionMatrixData[row][column];
+                }
+                dt.Rows.Add(dr);
+                dt.AcceptChanges();
+            }
+
+            data.Tables.Add(dt);
+
+            ConfusionMatrix.ItemsSource = data.Tables[0].DefaultView;
+        }
+
+        private void NormalizeRow(double[] data, double total)
+        {
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] = data[i] / total;
             }
         }
     }
