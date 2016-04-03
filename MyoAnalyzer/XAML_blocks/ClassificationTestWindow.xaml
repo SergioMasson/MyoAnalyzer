@@ -24,7 +24,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Margin="10,10,10,0" HorizontalAlignment="Left" Text="Confusion Matrix" FontWeight="Bold"/>
+            <TextBlock Grid.Row="0" Margin="10,10,10,5" HorizontalAlignment="Left" Text="Confusion Matrix" FontWeight="Bold"/>
             <DataGrid Margin="10,0,10,10" Grid.Row="1" Name="ConfusionMatrix" ItemsSource="{Binding dt}">
             </DataGrid>
         </Grid>

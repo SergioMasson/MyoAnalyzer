@@ -190,3 +190,7 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\Dynamic
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\bin\Debug\DynamicPlotWPF.pdb
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\ClassificationTestWindow.g.cs
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\ClassificationTestWindow.baml
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\TrainAndTestInputWindow.g.cs
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\TrainAndTestInputWindow.baml
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\ResultWindow.g.cs
+C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\XAML_blocks\ResultWindow.baml

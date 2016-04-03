@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -53,6 +54,7 @@ namespace MyoAnalyzer
             GesturesComboBox.Items.Add("Rock`n Roll");
             GesturesComboBox.Items.Add("Like");
             GesturesComboBox.Items.Add("One");
+            GesturesComboBox.SelectedIndex = 0;
 
             Channel1CheckBox.DataContext = this;
             Channel2CheckBox.DataContext = this;
@@ -216,6 +218,8 @@ namespace MyoAnalyzer
 
             DisplayText.AppendText("\nTrainning sucsseded! The total error for your classification was: " + error + " % ");
             DisplayText.ScrollToEnd();
+
+            LiveButton.Visibility = Visibility.Visible;
         }
 
         private void USB_Connect_Click(object sender, RoutedEventArgs e)
@@ -229,7 +233,7 @@ namespace MyoAnalyzer
         {
             if (Trainner == null)
             {
-                XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n You need create a classificator first!");
+                XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n You need to create a classificator first in order to teste it!!");
                 error.Show();
                 return;
             }
@@ -278,7 +282,7 @@ namespace MyoAnalyzer
                 _dataColected = new List<int[]>();
                 State = AppState.Acquiring;
                 StartTime = DateTime.UtcNow;
-                GoLiveButton.Content = "Finish";
+                TryPoseButton.Content = "Finish";
                 return;
             }
 
@@ -287,21 +291,28 @@ namespace MyoAnalyzer
             DisplayText.AppendText("\n You just did a " + result);
             DisplayText.ScrollToEnd();
 
-            GoLiveButton.Content = "Go Live";
+            TryPoseButton.Content = "Go Live";
 
             State = AppState.Waiting;
         }
 
         private void RankAttributes_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             List<Pose> posesToRankAttributes = (from XAML_blocks.GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
+
+            if (!posesToRankAttributes.Any(a => a.TotalPoseData.Any()))
+            {
+                XAML_blocks.ErroMassege error = new XAML_blocks.ErroMassege("\n You must load at least one data sample in order to use the Rank Attribute menu!");
+                error.Show();
+                return;
+            }
 
             AttributeRankWindow RankWindow = new AttributeRankWindow(posesToRankAttributes);
             RankWindow.Show();
         }
 
         private void AddGesture_Click(object sender, RoutedEventArgs e)
-        {
+        {         
             XAML_blocks.GesturePanel newGesture = new XAML_blocks.GesturePanel(GesturesComboBox.Items[GesturesComboBox.SelectedIndex].ToString());
 
             GesturesPanel.Children.Add(newGesture);
@@ -324,30 +335,81 @@ namespace MyoAnalyzer
         }
 
         #endregion ButtonClicks
-
-        private void TrainMethodChanges(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private async void TrainAndTest_Click(object sender, RoutedEventArgs e)
         {
-            // ... Get the ComboBox.
-            var comboBox = sender as ComboBox;
+            TrainAndTestInputWindow trainAndTestWindow = new TrainAndTestInputWindow();
+           
+            trainAndTestWindow.Show();
 
-            // ... Set SelectedItem as Window Title.
-            string value = comboBox.SelectedValue.ToString();
+            double[] data = await trainAndTestWindow.DataDone();
 
-            switch (value)
+            DisplayText.AppendText("\n" + (data[0]/100).ToString());
+            DisplayText.AppendText("\n" + data[1].ToString());
+
+            double percentageToTrain = data[0]/100;
+
+            double numberOfRepetitions = data[1];
+
+            List<Pose> totalPoseData = (from XAML_blocks.GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
+
+            ResultWindow resultWindow = new ResultWindow(totalPoseData, percentageToTrain, numberOfRepetitions, ChannalsToTrain);
+
+            resultWindow.Show();
+
+            DisplayText.AppendText("\nTrainning sucsseded!");
+            DisplayText.ScrollToEnd();
+        }
+
+        private async void LiveStreaming_Click(object sender, RoutedEventArgs e)
+        {
+            var previewsResult = Gestures.None;
+
+            while (true)
             {
-                case "Kernel":
-                    DefaultTrain = TrainMethods.Kernel;
-                    DisplayText.AppendText("Training method set to Kernel");
-                    break;
+                List<int[]> dataToEvaluate = await GetDataToEvaluteLive();
 
-                case "Linear SVM":
-                    DefaultTrain = TrainMethods.LinearSVM;
-                    break;
+                Gestures result = Trainner.Classify(dataToEvaluate);
 
-                case "Neural Networks":
-                    DefaultTrain = TrainMethods.NeuralNetworks;
-                    break;
+                DisplayText.AppendText("\n You just did a " + result);
+
+                DisplayText.ScrollToEnd();
+
+                if (result != previewsResult)
+                {
+                    previewsResult = result;
+
+                    if (_connectClick != null)
+                    {
+                        if (_connectClick.IsStreamReady())
+                        {
+                            _connectClick.SendDataToUsb(((int)result).ToString());
+                        }
+                    }
+
+                }
+            }        
+        }
+
+        private Task<List<int[]>> GetDataToEvaluteLive()
+        {
+            return Task<List<int[]>>.Factory.StartNew(WaitingForEmgData);
+        }
+
+        private List<int[]> WaitingForEmgData()
+        {
+            int WindowSize = 200;
+
+            _dataColected = new List<int[]>();
+            StartTime = DateTime.UtcNow;
+
+            State = AppState.Acquiring;
+
+            while (_dataColected.Count <= WindowSize)
+            {
+                
             }
+
+            return _dataColected;
         }
     }
 }

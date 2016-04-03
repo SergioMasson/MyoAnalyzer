@@ -16,12 +16,12 @@
     }
 
     public enum Gestures
-    {
-        Open = 1,
-        Close,
-        Rock,
-        Like,
-        One,
+    {      
+        Close = 1,
+        Open = 2,
+        Rock = 3,
+        Like = 4,
+        One = 5,
         None = 0
     }  
 }

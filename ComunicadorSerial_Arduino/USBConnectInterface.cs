@@ -6,10 +6,14 @@ namespace ComunicadorSerial_Arduino
 {
     public partial class USBConnectInterface : Form
     {
+
+        private bool IsReady;
+
         public USBConnectInterface()
         {
             InitializeComponent();
             timerCOM.Enabled = true;
+            IsReady = false;
         }
 
         private void AtualizaListaCOMs()
@@ -62,6 +66,7 @@ namespace ComunicadorSerial_Arduino
                 {
                     serialPort1.PortName = comboBox1.Items[comboBox1.SelectedIndex].ToString();
                     serialPort1.Open();
+                    IsReady = true;
                 }
                 catch
                 {
@@ -121,6 +126,11 @@ namespace ComunicadorSerial_Arduino
         private void USBConnectInterface_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public bool IsStreamReady()
+        {
+            return IsReady;
         }
     }
 }
