@@ -6,14 +6,7 @@
         Waiting,
         Acquiring,
         Live,
-    }
-
-    public enum TrainMethods
-    {
-        Kernel,
-        LinearSVM,
-        NeuralNetworks
-    }
+    }  
 
     public enum Gestures
     {      

@@ -11,6 +11,6 @@ namespace MyoAnalyzer.Classification.Extraceter
     {
         double[][] ExtractFeaturesFromMany(Pose poseRawData);
 
-        double[][] ExtractFeaturesFromSingle(List<int[]> poseRawData);
+        double[][] ExtractFeaturesFromSingle(List<double[]> poseRawData);
     }
 }

@@ -61,11 +61,29 @@ namespace MyoAnalyzer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to dados.txt.
+        /// </summary>
+        internal static string DefaulTextToSave {
+            get {
+                return ResourceManager.GetString("DefaulTextToSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Myo {0} has connected!.
         /// </summary>
         internal static string MainWindow_Hub_MyoConnected_Myo__0__has_connected_ {
             get {
                 return ResourceManager.GetString("MainWindow_Hub_MyoConnected_Myo__0__has_connected_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text File | *.txt.
+        /// </summary>
+        internal static string MainWindow_SaveButton_Click_Text_File {
+            get {
+                return ResourceManager.GetString("MainWindow_SaveButton_Click_Text_File", resourceCulture);
             }
         }
     }

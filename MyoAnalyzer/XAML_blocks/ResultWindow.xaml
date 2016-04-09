@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyoAnalyzer.XAML_blocks"
         mc:Ignorable="d"
-        Title="Results" Width="400" SizeToContent="Height" Loaded="Results_Loaded">
+        Title="Results" Width="400" SizeToContent="Height" Loaded="Results_Loaded" ResizeMode="NoResize">
     <Grid>
         <Grid Margin="10">
             <Grid.RowDefinitions>

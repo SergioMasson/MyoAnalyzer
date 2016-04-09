@@ -16,9 +16,8 @@ using System.Windows.Controls;
 
 namespace MyoAnalyzer
 {
-    /// <summary>
-    /// Interaction logic for PlotDynamicWindow.xaml
-    /// </summary>
+  
+
     public partial class MainWindow
     {
         private const int NUMBER_OF_SENSORS = 8;
@@ -26,19 +25,15 @@ namespace MyoAnalyzer
         private readonly IHub _hub;
         private DateTime StartTime;
 
-        private AppState State;
-        private TrainMethods DefaultTrain;
+        private AppState State;       
 
         private List<string> EmgDataToSave;
-        private List<int[]> _dataColected;
-
-        // Machi learning variables
+        private List<double[]> _dataColected;
+      
         private double[][] DataTraining;
-
-        // Class to perform the trainning
+       
         private ITrainner Trainner;
-
-        // Arduino
+     
         private USBConnectInterface _connectClick;
 
         public bool[] ChannalsToTrain { get; set; }
@@ -75,7 +70,7 @@ namespace MyoAnalyzer
             State = AppState.Started;
             EmgDataToSave = new List<string>();
 
-            _dataColected = new List<int[]>();
+            _dataColected = new List<double[]>();
 
             // get set up to listen for Myo events
 
@@ -129,7 +124,7 @@ namespace MyoAnalyzer
 
             string data = "";
 
-            int[] datasColected = new int[9];
+            double[] datasColected = new double[9];
 
             // pull _dataColected from each sensor
             for (var i = 0; i < NUMBER_OF_SENSORS; ++i)
@@ -138,7 +133,7 @@ namespace MyoAnalyzer
                 data = data + e.EmgData.GetDataForSensor(i) + " \t ";
             }
 
-            datasColected[8] = (int)(e.Timestamp - StartTime).TotalMilliseconds;
+            datasColected[8] = (e.Timestamp - StartTime).TotalMilliseconds;
 
             //TODO: Fazer interpolação
             if (_dataColected.Count > 2)
@@ -172,7 +167,8 @@ namespace MyoAnalyzer
 
             State = AppState.Acquiring;
             StartTime = DateTime.UtcNow;
-            _dataColected = new List<int[]>();
+            _dataColected = new List<double[]>();
+            EmgDataToSave = new List<string>();
             DisplayText.AppendText("\n You are now recording Emg Data from Myo");
             DisplayText.ScrollToEnd();
             GetDataButton.Content = "Stop Acquiring";
@@ -180,9 +176,11 @@ namespace MyoAnalyzer
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.SaveFileDialog save = new System.Windows.Forms.SaveFileDialog();
-            save.FileName = "dados.txt";
-            save.Filter = "Text File | *.txt";
+            var save = new System.Windows.Forms.SaveFileDialog
+            {
+                FileName = Properties.Resources.DefaulTextToSave,
+                Filter = Properties.Resources.MainWindow_SaveButton_Click_Text_File
+            };
 
             if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -191,6 +189,8 @@ namespace MyoAnalyzer
                 writer.Dispose();
                 writer.Close();
             }
+
+            EmgDataToSave = new List<string>();
         }
 
         private void CleanButton_Click(object sender, RoutedEventArgs e)
@@ -279,17 +279,25 @@ namespace MyoAnalyzer
 
             if (State != AppState.Acquiring)
             {
-                _dataColected = new List<int[]>();
+                _dataColected = new List<double[]>();
                 State = AppState.Acquiring;
                 StartTime = DateTime.UtcNow;
                 TryPoseButton.Content = "Finish";
                 return;
             }
 
-            string result = Trainner.Classify(_dataColected).ToString();
+            var result = Trainner.Classify(_dataColected);
 
             DisplayText.AppendText("\n You just did a " + result);
             DisplayText.ScrollToEnd();
+
+            if (_connectClick != null)
+            {
+                if (_connectClick.IsStreamReady())
+                {
+                    _connectClick.SendDataToUsb(((int)result).ToString());
+                }
+            }
 
             TryPoseButton.Content = "Go Live";
 
@@ -334,19 +342,18 @@ namespace MyoAnalyzer
 
         }
 
-        #endregion ButtonClicks
         private async void TrainAndTest_Click(object sender, RoutedEventArgs e)
         {
             TrainAndTestInputWindow trainAndTestWindow = new TrainAndTestInputWindow();
-           
+
             trainAndTestWindow.Show();
 
-            double[] data = await trainAndTestWindow.DataDone();
+            int[] data = await trainAndTestWindow.DataDone();
 
-            DisplayText.AppendText("\n" + (data[0]/100).ToString());
+            DisplayText.AppendText("\n" + (data[0] / 100).ToString());
             DisplayText.AppendText("\n" + data[1].ToString());
 
-            double percentageToTrain = data[0]/100;
+            double percentageToTrain = data[0] / 100.0;
 
             double numberOfRepetitions = data[1];
 
@@ -366,7 +373,7 @@ namespace MyoAnalyzer
 
             while (true)
             {
-                List<int[]> dataToEvaluate = await GetDataToEvaluteLive();
+                List<double[]> dataToEvaluate = await GetDataToEvaluteLive();
 
                 Gestures result = Trainner.Classify(dataToEvaluate);
 
@@ -387,19 +394,21 @@ namespace MyoAnalyzer
                     }
 
                 }
-            }        
+            }
         }
 
-        private Task<List<int[]>> GetDataToEvaluteLive()
+        #endregion ButtonClicks
+
+        private Task<List<double[]>> GetDataToEvaluteLive()
         {
-            return Task<List<int[]>>.Factory.StartNew(WaitingForEmgData);
+            return Task<List<double[]>>.Factory.StartNew(WaitingForEmgData);
         }
 
-        private List<int[]> WaitingForEmgData()
+        private List<double[]> WaitingForEmgData()
         {
-            int WindowSize = 200;
+            int WindowSize = 100;
 
-            _dataColected = new List<int[]>();
+            _dataColected = new List<double[]>();
             StartTime = DateTime.UtcNow;
 
             State = AppState.Acquiring;

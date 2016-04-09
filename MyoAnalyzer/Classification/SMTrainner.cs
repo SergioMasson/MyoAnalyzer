@@ -29,7 +29,7 @@ namespace MyoAnalyzer.Classification
             Ranker = new FeatureRanker();
         }
 
-        public Gestures Classify(List<int[]> rawData)
+        public Gestures Classify(List<double[]> rawData)
         {
             return Gestures.None;
         }
@@ -51,7 +51,7 @@ namespace MyoAnalyzer.Classification
             return 0.0;
         }
 
-        private double[][] ExtractFeaturesFromSingleTry(List<int[]> pose1RawData)
+        private double[][] ExtractFeaturesFromSingleTry(List<double[]> pose1RawData)
         {
             double[][] model = new double[1][];
 

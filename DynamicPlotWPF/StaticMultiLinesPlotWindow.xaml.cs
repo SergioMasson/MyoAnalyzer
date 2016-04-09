@@ -22,7 +22,7 @@ namespace DynamicPlotWPF
     /// </summary>
     public partial class StaticMultiLinesPlotWindow : Window
     {
-        private List<int[]> Signal;
+        private List<double[]> Signal;
 
         private int[] TimeStamp;
 
@@ -40,10 +40,10 @@ namespace DynamicPlotWPF
             Brushes.MediumPurple
         };
 
-        public StaticMultiLinesPlotWindow(List<int[]> signal)
+        public StaticMultiLinesPlotWindow(List<double[]> signal)
         {
             Signal = signal;
-            TimeStamp = signal.Select( a => a[NUMBER_OF_SENSORS]).ToArray();
+            TimeStamp = signal.Select( a => (int)a[NUMBER_OF_SENSORS]).ToArray();
             InitializeComponent();
         }
 
@@ -93,7 +93,7 @@ namespace DynamicPlotWPF
 
             for (int i = 0; i < NUMBER_OF_SENSORS; i++)
             {
-                int[] dataToPlot = Signal.Select(a => a[i]).ToArray();
+                int[] dataToPlot = Signal.Select(a => (int)a[i]).ToArray();
 
                 var numberOpenDataSource = new EnumerableDataSource<int>(dataToPlot);
                 numberOpenDataSource.SetYMapping(y => y);
@@ -127,7 +127,7 @@ namespace DynamicPlotWPF
 
                 int sensorNumber = fakeSensorNumber - 1;
                                             
-                int[] dataToPlot = Signal.Select(a => a[sensorNumber]).ToArray();
+                int[] dataToPlot = Signal.Select(a => (int)a[sensorNumber]).ToArray();
 
                 var numberOpenDataSource = new EnumerableDataSource<int>(dataToPlot);
                 numberOpenDataSource.SetYMapping(y => y);

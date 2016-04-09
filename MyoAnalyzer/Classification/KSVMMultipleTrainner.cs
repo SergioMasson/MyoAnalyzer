@@ -29,7 +29,7 @@ namespace MyoAnalyzer.Classification
             _isTrainned = false;           
         }
 
-        public Gestures Classify(List<int[]> rawData)
+        public Gestures Classify(List<double[]> rawData)
         {
             if (_channelsToTrain == null)
                 return Gestures.None;

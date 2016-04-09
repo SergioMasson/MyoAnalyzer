@@ -1,13 +1,13 @@
-﻿using MyoAnalyzer.Classification;
+﻿using Accord.Math;
+using MyoAnalyzer.Classification;
 using MyoAnalyzer.DataTypes;
+using MyoAnalyzer.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
-using Accord.Math;
-using MyoAnalyzer.Enums;
 
 namespace MyoAnalyzer.XAML_blocks
 {
@@ -15,7 +15,7 @@ namespace MyoAnalyzer.XAML_blocks
     /// Interaction logic for ResultWindow.xaml
     /// </summary>
     public partial class ResultWindow : Window
-    {        
+    {
         private readonly List<Pose> _poses;
         private readonly bool[] _channalsToTrain;
 
@@ -37,7 +37,7 @@ namespace MyoAnalyzer.XAML_blocks
 
             for (int i = 0; i < n; i++)
             {
-                ConfusionMatrixData[i] = new double[n];               
+                ConfusionMatrixData[i] = new double[n];
             }
 
             InitializeComponent();
@@ -72,13 +72,13 @@ namespace MyoAnalyzer.XAML_blocks
             var errorOnTrain = 0.0;
             var errorOnTest = 0.0;
 
-            int N = _poses.Count;
+            var n = _poses.Count;
 
-            Gestures[] GestureList = new Gestures[N];
-        
+            var gestureList = new Gestures[n];
+
             for (var i = 0; i < _repetitions; i++)
             {
-                double[][] confusionMatrixData = new double[N][];
+                double[][] confusionMatrixData = new double[n][];
 
                 List<Pose> posesToTrain;
                 List<Pose> posesToTest;
@@ -86,45 +86,41 @@ namespace MyoAnalyzer.XAML_blocks
                 RandowSeparation(_poses, _percentage, out posesToTrain, out posesToTest);
 
                 var trainner = new KVizinhosTrainner();
-                errorOnTrain += trainner.Train(posesToTrain, _channalsToTrain);               
+                errorOnTrain += trainner.Train(posesToTrain, _channalsToTrain);
 
                 double rightGuess = 0;
                 int totalGuess = 0;
-                int rowNumber = 0;               
+                int rowNumber = 0;
 
-                
-
-                for (int k = 0; k < N; k++)
+                for (int k = 0; k < n; k++)
                 {
-                    confusionMatrixData[k] = new double[N];
-                    GestureList[k] = posesToTest[k].GestureName;
+                    confusionMatrixData[k] = new double[n];
+                    gestureList[k] = posesToTest[k].GestureName;
                 }
 
-                for (int j = 0; j < N; j++)
+                for (int j = 0; j < n; j++)
                 {
-                    confusionMatrixData[j] = new double[N];
+                    confusionMatrixData[j] = new double[n];
                 }
 
                 foreach (var pose in posesToTest)
                 {
-                    double totalRowGuest = 0;
+                    double totalRowGuest = pose.TotalPoseData.Count;
 
                     foreach (var emgData in pose.TotalPoseData)
                     {
-                        totalGuess++;
-                        totalRowGuest++;
+                        totalGuess++;                       
 
                         var outPutGesture = trainner.Classify(emgData);
 
                         if (outPutGesture == pose.GestureName)
                         {
-                            rightGuess++;
+                            rightGuess++;                          
                         }
+                        var index = gestureList.IndexOf(outPutGesture);
 
-                        var index = GestureList.IndexOf(outPutGesture);
-
-                        confusionMatrixData[rowNumber][index]++;                       
-                    }                   
+                        confusionMatrixData[rowNumber][index]++;
+                    }
 
                     NormalizeRow(confusionMatrixData[rowNumber], totalRowGuest);
 
@@ -132,7 +128,7 @@ namespace MyoAnalyzer.XAML_blocks
                 }
 
                 errorOnTest += rightGuess / totalGuess;
-                ConfusionMatrixData = SumMatrix(ConfusionMatrixData, confusionMatrixData);
+                SumMatrix(ConfusionMatrixData, confusionMatrixData);
             }
 
             TrainningErrorTextBox.Text = (errorOnTrain / _repetitions).ToString(CultureInfo.InvariantCulture);
@@ -150,7 +146,7 @@ namespace MyoAnalyzer.XAML_blocks
 
         private void NormalizeRow(double[] data, double total)
         {
-            for (int i = 0; i < data.Length; i++)
+            for (var i = 0; i < data.Length; i++)
             {
                 data[i] = data[i] / total;
             }
@@ -158,25 +154,21 @@ namespace MyoAnalyzer.XAML_blocks
 
         private void NormalizeMatrix(double[][] matrix, double total)
         {
-            for (int i = 0; i < matrix.Length; i++)
+            for (var i = 0; i < matrix.Length; i++)
             {
                 NormalizeRow(matrix[i], total);
             }
         }
 
-        private double[][] SumMatrix(double[][] matrix1, double[][]matrix2)
-        {
-            double[][] newMatrix = matrix1;
-
-            foreach (var row in matrix1)
+        private void SumMatrix(double[][] matrix1, double[][] matrix2)
+        {            
+            for (int rowNumber = 0; rowNumber < matrix1.Count(); rowNumber++)
             {
-                foreach (var element in row)
+                for (int index = 0; index < matrix1[rowNumber].Count(); index++)
                 {
-                    newMatrix[row.IndexOf(element)][matrix1.IndexOf(row)] =
-                        matrix2[row.IndexOf(element)][matrix1.IndexOf(row)] + element;
+                    matrix1[rowNumber][index] += matrix2[rowNumber][index];
                 }
             }
-            return newMatrix;
         }
 
         private void SetMatrixToScreen()

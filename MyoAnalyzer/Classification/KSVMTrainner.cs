@@ -27,7 +27,7 @@ namespace MyoAnalyzer.Classification
             _isTrainned = false;
         }
 
-        public Gestures Classify(List<int[]> rawData)
+        public Gestures Classify(List<double[]> rawData)
         {
             if (_channelsToTrain == null)
                 return Gestures.None;
@@ -105,7 +105,7 @@ namespace MyoAnalyzer.Classification
             return error;
         }
 
-        private double[][] ExtractFeaturesFromSingleTry(List<int[]> pose1RawData)
+        private double[][] ExtractFeaturesFromSingleTry(List<double[]> pose1RawData)
         {
             double[][] model = new double[1][];
 

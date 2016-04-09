@@ -8,7 +8,7 @@ namespace MyoAnalyzer.Classification
     {
         double Train(List<Pose> pose1RawData, bool[] channelsToTrain);
 
-        Gestures Classify(List<int[]> rawData);
+        Gestures Classify(List<double[]> rawData);
 
         Gestures Classify(EmgTrainData rawData);
 

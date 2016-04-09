@@ -20,9 +20,9 @@ namespace MyoAnalyzer.XAML_blocks
     public partial class TrainAndTestInputWindow : Window
     {
 
-        private double Percentage;
+        private int Percentage;
 
-        private double Repetitions;
+        private int Repetitions;
 
         public TrainAndTestInputWindow()
         {           
@@ -31,23 +31,43 @@ namespace MyoAnalyzer.XAML_blocks
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            Percentage = Convert.ToDouble(PercentageTextBox.Text);
-            Repetitions = Convert.ToDouble(RepetitionTextBox.Text);
+
+            try
+            {
+                Percentage = int.Parse(PercentageTextBox.Text);
+                PercentageError.Visibility = Visibility.Hidden;
+                try
+                {
+                    Repetitions = int.Parse(RepetitionTextBox.Text);
+                    RepetitionError.Visibility = Visibility.Hidden;
+                }
+                catch (Exception exception)
+                {                  
+                    RepetitionError.Visibility = Visibility.Visible;
+                    return;
+                }                
+            }
+            catch (Exception exception)
+            {                
+                PercentageError.Visibility = Visibility.Visible;
+                return;
+            }          
+           
             this.Close();
         }
 
-        public Task<double[]>DataDone()
+        public Task<int[]>DataDone()
         {
-            return Task<double[]>.Factory.StartNew(WaitingForData);
+            return Task<int[]>.Factory.StartNew(WaitingForData);
         }
 
-        public double[] WaitingForData()
+        public int[] WaitingForData()
         {
             while (true)
             {
                 if (Percentage != 0 && Repetitions != 0)
                 {
-                    double[] data = {Percentage, Repetitions};
+                    int[] data = {Percentage, Repetitions};
                     return data;
                 }           
             }

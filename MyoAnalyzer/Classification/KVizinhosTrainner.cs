@@ -48,7 +48,7 @@ namespace MyoAnalyzer.Classification
             return 0;
         }
 
-        public Gestures Classify(List<int[]> rawData)
+        public Gestures Classify(List<double[]> rawData)
         {
             Point newData = new Point(FeatureExtracter.ExtractFeaturesFromSingle(rawData).First());
 
@@ -88,18 +88,7 @@ namespace MyoAnalyzer.Classification
         public bool IsTrainned()
         {
             return isTrainned;
-        }
-
-        private string[] GetLabels(List<Pose> poseRawData)
-        {
-            string[] model = new string[poseRawData.Count];
-
-            for (int i = 0; i < poseRawData.Count; i++)
-            {
-                model[i] = Common.PoseToString[poseRawData[i].GestureName];
-            }
-            return model;
-        }
+        }      
 
         internal class Point
         {

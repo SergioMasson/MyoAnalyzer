@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using MyoAnalyzer.DataTypes;
 
 namespace MyoAnalyzer.Classification.Extraceter
 {
-    class AverageEnergyExtracter : IExtracter
+    internal class AverageEnergyExtracter : IExtracter
     {
 
-        private readonly bool[] _channelsToTrain;
-
+        private readonly bool[] _channelsToTrain;     
 
         public AverageEnergyExtracter(bool[] channelsToTrain)
         {
@@ -29,48 +29,27 @@ namespace MyoAnalyzer.Classification.Extraceter
 
             foreach (var poseSet in allRawData)
             {
-                model[i] = GetAverageEnergi(poseSet);
+                model[i] = GetAverageEnergi(poseSet.AquisitionData);
                 i++;
             }
 
             return model;
         }
 
-        public double[][] ExtractFeaturesFromSingle(List<int[]> pose1RawData)
-        {
+        public double[][] ExtractFeaturesFromSingle(List<double[]> pose1RawData)
+        {           
             double[][] model = new double[1][];
 
-            model[0] = new double[_channelsToTrain.Count(a => a)];
-
-            int dataTrained = 0;
-
-            for (int i = 0; i < _channelsToTrain.Length - 1; i++)
-            {
-
-                if (_channelsToTrain[i])
-                {
-                    foreach (var poseSet in pose1RawData)
-                    {
-                        model[0][dataTrained] += Math.Pow(poseSet[i], 2);
-                    }
-                    dataTrained++;
-                }
-            }
-
-            for (var j = 0; j < model[0].Length; j++)
-            {
-                model[0][j] = Math.Sqrt(model[0][j] / pose1RawData.Count);
-            }
+            model[0] = GetAverageEnergi(pose1RawData);           
 
             return model;
         }
 
-
-        private double[] GetAverageEnergi(EmgTrainData poseSet)
+        private double[] GetAverageEnergi(List<double[]> rawPoseSet)
         {
-            double[] model = new double[_channelsToTrain.Count(a => a)];
+            double[] model = new double[_channelsToTrain.Count(a => a)];                      
 
-            foreach (var value in poseSet.AquisitionData)
+            foreach (var value in rawPoseSet)
             {
                 int c = 0;
                 for (int i = 0; i < _channelsToTrain.Length; i++)
@@ -82,14 +61,12 @@ namespace MyoAnalyzer.Classification.Extraceter
                     }
                 }
             }
-
             for (int j = 0; j < model.Length; j++)
             {
-                model[j] = Math.Sqrt(model[j] / poseSet.AquisitionData.Count);
+                model[j] = Math.Sqrt(model[j]/ rawPoseSet.Count);
             }
 
             return model;
         }
-
     }
 }

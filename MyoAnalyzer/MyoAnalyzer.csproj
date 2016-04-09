@@ -127,6 +127,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classification\Preprocessing\CommonPreprocessing.cs" />
+    <Compile Include="Classification\Preprocessing\Demodulation.cs" />
+    <Compile Include="Classification\Preprocessing\GeneralPreprocessing.cs" />
+    <Compile Include="Classification\Preprocessing\IPreprocessor.cs" />
+    <Compile Include="Classification\Preprocessing\MovingAverage.cs" />
+    <Compile Include="Classification\Preprocessing\PreprocessesTypes.cs" />
     <Compile Include="XAML_blocks\ResultWindow.xaml.cs">
       <DependentUpon>ResultWindow.xaml</DependentUpon>
     </Compile>

@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyoAnalyzer.XAML_blocks"
         mc:Ignorable="d"
-        Title="Parameters" SizeToContent="Height" Width="310" ResizeMode="NoResize">
+        Title="Parameters" SizeToContent="Width" Height="200" ResizeMode="NoResize">
     <Grid>
         <Grid Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -20,8 +21,10 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,10,10,10" Text="Number of repetitions: " Height="Auto" Width="Auto"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,10,10,10" Text="Percentage of samples to test: " Height="Auto" Width="Auto"/>
-            <TextBox Name="RepetitionTextBox" Grid.Row="0" Grid.Column="1" Margin="5,10,5,10" Text=""/>
-            <TextBox Name="PercentageTextBox" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" Text=""/>
+            <TextBox Name="RepetitionTextBox" Grid.Row="0" Grid.Column="1" Margin="5,10,5,10" Text="" Width="90"/>
+            <TextBox Name="PercentageTextBox" Grid.Row="1" Grid.Column="1" Margin="5,10,5,10" Text="" Width="90"/>
+            <TextBlock Name="RepetitionError" Grid.Row="0" Grid.Column="2" Margin="10,10,10,10" Text="Type a valid number" Height="Auto" Width="Auto" Foreground="#FFF50808" Visibility="Hidden"/>
+            <TextBlock Name="PercentageError" Grid.Row="1" Grid.Column="2" Margin="10,10,10,10" Text="Type a valid number" Height="Auto" Width="Auto" Foreground="#FFF50808" Visibility="Hidden"/>
             <Button x:Name="StartButton" Grid.Row="2" Grid.Column="0" Width="120" Height="30" Margin="10,10,10,10" HorizontalAlignment="Left" Content="Start Test" Click="Start_Click"/>
         </Grid>
     </Grid>

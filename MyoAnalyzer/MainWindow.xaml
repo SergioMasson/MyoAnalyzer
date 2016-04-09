@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MyoAnalyzer"
         xmlns:Properties="clr-namespace:MyoAnalyzer.Properties" x:Class="MyoAnalyzer.MainWindow"
         mc:Ignorable="d"
-        Title="MyoAnalyzer" Height="470" Width="760" Loaded="OnLoad" Closing="OnClose" ResizeMode="NoResize" Icon="Resources/logo.ico">
+        Title="MyoAnalyzer" Height="500" Width="760" Loaded="OnLoad" Closing="OnClose" ResizeMode="NoResize" Icon="Resources/logo.ico">
     <Grid>
         <TextBox x:Name="DisplayText" HorizontalAlignment="Left" Height="107" Margin="10,45,0,0" TextWrapping="Wrap" Text="Welcome to MyoAnalyzer!" VerticalAlignment="Top" Width="223" IsReadOnly="True" VerticalScrollBarVisibility="Auto" />
         <Button x:Name="GetDataButton" Content="Get Data" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top" Width="110" Height="40" Click="GetDataClick" />
