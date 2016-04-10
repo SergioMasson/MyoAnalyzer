@@ -6,6 +6,7 @@
         Waiting,
         Acquiring,
         Live,
+        Streaming
     }  
 
     public enum Gestures
@@ -16,5 +17,13 @@
         Like = 4,
         One = 5,
         None = 0
-    }  
+    }
+
+    public enum StreamStatus
+    {
+        Streaming,
+        Awayting,
+        NotReady,
+        None
+    }
 }

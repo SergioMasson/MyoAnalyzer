@@ -72,6 +72,8 @@ namespace MyoAnalyzer.XAML_blocks
             var errorOnTrain = 0.0;
             var errorOnTest = 0.0;
 
+            List<double> valuesHistory = new List<double>();
+
             var n = _poses.Count;
 
             var gestureList = new Gestures[n];
@@ -89,7 +91,8 @@ namespace MyoAnalyzer.XAML_blocks
                 errorOnTrain += trainner.Train(posesToTrain, _channalsToTrain);
 
                 double rightGuess = 0;
-                int totalGuess = 0;
+                double totalGuess = 0;
+
                 int rowNumber = 0;
 
                 for (int k = 0; k < n; k++)
@@ -109,13 +112,13 @@ namespace MyoAnalyzer.XAML_blocks
 
                     foreach (var emgData in pose.TotalPoseData)
                     {
-                        totalGuess++;                       
+                        totalGuess++;
 
                         var outPutGesture = trainner.Classify(emgData);
 
                         if (outPutGesture == pose.GestureName)
                         {
-                            rightGuess++;                          
+                            rightGuess++;
                         }
                         var index = gestureList.IndexOf(outPutGesture);
 
@@ -127,12 +130,16 @@ namespace MyoAnalyzer.XAML_blocks
                     rowNumber++;
                 }
 
+                valuesHistory.Add(rightGuess / totalGuess);
+
                 errorOnTest += rightGuess / totalGuess;
                 SumMatrix(ConfusionMatrixData, confusionMatrixData);
             }
 
-            TrainningErrorTextBox.Text = (errorOnTrain / _repetitions).ToString(CultureInfo.InvariantCulture);
-            TestErrorTextBox.Text = (errorOnTest / _repetitions).ToString(CultureInfo.InvariantCulture);
+            TrainningErrorTextBox.Text = (errorOnTrain / _repetitions).ToString("N6", CultureInfo.InvariantCulture);
+            TestErrorTextBox.Text = (errorOnTest / _repetitions).ToString("N6", CultureInfo.InvariantCulture);
+
+            StdTextBox.Text = CalculateStdDev(valuesHistory).ToString("N6", CultureInfo.InvariantCulture);
 
             NormalizeMatrix(ConfusionMatrixData, _repetitions);
 
@@ -161,7 +168,7 @@ namespace MyoAnalyzer.XAML_blocks
         }
 
         private void SumMatrix(double[][] matrix1, double[][] matrix2)
-        {            
+        {
             for (int rowNumber = 0; rowNumber < matrix1.Count(); rowNumber++)
             {
                 for (int index = 0; index < matrix1[rowNumber].Count(); index++)
@@ -204,6 +211,20 @@ namespace MyoAnalyzer.XAML_blocks
             data.Tables.Add(dt);
 
             ConfusionMatrix.ItemsSource = data.Tables[0].DefaultView;
+        }
+
+        private double CalculateStdDev(IEnumerable<double> values)
+        {
+            double ret = 0;
+
+            if (!values.Any()) return ret;
+
+            double avg = values.Average();
+
+            double sum = values.Sum(d => Math.Pow(d - avg, 2));
+
+            ret = Math.Sqrt((sum) / (values.Count() - 1));
+            return ret;
         }
     }
 }

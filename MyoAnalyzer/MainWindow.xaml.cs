@@ -25,7 +25,8 @@ namespace MyoAnalyzer
         private readonly IHub _hub;
         private DateTime StartTime;
 
-        private AppState State;       
+        private AppState State;
+        private StreamStatus _streamStatus;
 
         private List<string> EmgDataToSave;
         private List<double[]> _dataColected;
@@ -68,6 +69,8 @@ namespace MyoAnalyzer
             }
 
             State = AppState.Started;
+            _streamStatus = StreamStatus.None;
+
             EmgDataToSave = new List<string>();
 
             _dataColected = new List<double[]>();
@@ -350,9 +353,6 @@ namespace MyoAnalyzer
 
             int[] data = await trainAndTestWindow.DataDone();
 
-            DisplayText.AppendText("\n" + (data[0] / 100).ToString());
-            DisplayText.AppendText("\n" + data[1].ToString());
-
             double percentageToTrain = data[0] / 100.0;
 
             double numberOfRepetitions = data[1];
@@ -369,31 +369,33 @@ namespace MyoAnalyzer
 
         private async void LiveStreaming_Click(object sender, RoutedEventArgs e)
         {
-            var previewsResult = Gestures.None;
+            if (_streamStatus != StreamStatus.Streaming)
+            {                
+                StopLive.Visibility = Visibility.Visible;
+                LiveButton.Visibility = Visibility.Hidden;
 
-            while (true)
+                _streamStatus = StreamStatus.Streaming;
+
+                DisplayText.Text = string.Empty;
+
+                DisplayText.AppendText("Streaming Started! ");
+
+                await AwaitForTreamingToStop();
+
+                DisplayText.Text = string.Empty;
+
+                DisplayText.AppendText("You just stoped Streaming");
+
+            }          
+        }
+
+        private void StopLive_Click(object sender, RoutedEventArgs e)
+        {
+            if (_streamStatus == StreamStatus.Streaming)
             {
-                List<double[]> dataToEvaluate = await GetDataToEvaluteLive();
-
-                Gestures result = Trainner.Classify(dataToEvaluate);
-
-                DisplayText.AppendText("\n You just did a " + result);
-
-                DisplayText.ScrollToEnd();
-
-                if (result != previewsResult)
-                {
-                    previewsResult = result;
-
-                    if (_connectClick != null)
-                    {
-                        if (_connectClick.IsStreamReady())
-                        {
-                            _connectClick.SendDataToUsb(((int)result).ToString());
-                        }
-                    }
-
-                }
+                _streamStatus = StreamStatus.Awayting;
+                StopLive.Visibility = Visibility.Hidden;
+                LiveButton.Visibility = Visibility.Visible;               
             }
         }
 
@@ -419,6 +421,36 @@ namespace MyoAnalyzer
             }
 
             return _dataColected;
-        }
+        }       
+
+        private async Task AwaitForTreamingToStop()
+        {
+            var previewsResult = Gestures.None;
+
+            while (_streamStatus == StreamStatus.Streaming)
+            {
+                List<double[]> dataToEvaluate = await GetDataToEvaluteLive();
+
+                Gestures result = Trainner.Classify(dataToEvaluate);
+
+                DisplayText.AppendText("\n You just did a " + result);
+
+                DisplayText.ScrollToEnd();
+
+                if (result != previewsResult)
+                {
+                    previewsResult = result;
+
+                    if (_connectClick != null)
+                    {
+                        if (_connectClick.IsStreamReady())
+                        {
+                            _connectClick.SendDataToUsb(((int)result).ToString());
+                        }
+                    }
+                }
+            }
+            _connectClick?.Close();
+        }      
     }
 }
