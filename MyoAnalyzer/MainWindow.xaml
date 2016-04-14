@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:MyoAnalyzer"
         xmlns:Properties="clr-namespace:MyoAnalyzer.Properties" x:Class="MyoAnalyzer.MainWindow"
         mc:Ignorable="d"
-        Title="MyoAnalyzer" Height="500" Width="760" Loaded="OnLoad" Closing="OnClose" ResizeMode="NoResize" Icon="Resources/logo.ico">
+        Title="MyoAnalyzer" Height="600" Width="760" Loaded="OnLoad" Closing="OnClose" ResizeMode="NoResize" Icon="Resources/logo.ico">
     <Grid>
         <TextBox x:Name="DisplayText" HorizontalAlignment="Left" Height="107" Margin="10,45,0,0" TextWrapping="Wrap" Text="Welcome to MyoAnalyzer!" VerticalAlignment="Top" Width="223" IsReadOnly="True" VerticalScrollBarVisibility="Auto" />
         <Button x:Name="GetDataButton" Content="Get Data" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top" Width="110" Height="40" Click="GetDataClick" />
         <Button x:Name="SaveButton" Content="Save Data" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top" Width="223" Height="40" Click="SaveButton_Click" Foreground="#FF0A830A" />
         <Button x:Name="CleanButton" Content="Reset" HorizontalAlignment="Left" Margin="125,157,0,0" VerticalAlignment="Top" Width="108" Height="41" Click="CleanButton_Click" />
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="400" Margin="249,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="489">
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="500" Margin="249,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="489">
         </Rectangle>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="264,17,0,0" TextWrapping="Wrap" Text="Machine Learning Tools" VerticalAlignment="Top" Height="20" Width="225" FontWeight="Bold" />
         <TextBlock x:Name="Pose1TexBlock" HorizontalAlignment="Left" Height="21" Margin="10,19,0,0" TextWrapping="Wrap" Text="Data Acquisition Tools" VerticalAlignment="Top" Width="213" FontWeight="Bold" />
@@ -92,7 +92,7 @@
         <Button x:Name="PlotTestDataButton" Content="Plot Test" HorizontalAlignment="Left" Margin="619,58,0,0" VerticalAlignment="Top" Width="98" Height="36" FontWeight="Bold" Visibility="Hidden" Click="PlotTest_Click" />
         <Button x:Name="AddNewGesture" Content="Add" HorizontalAlignment="Left" Margin="390,72,0,0" VerticalAlignment="Top" Width="43" Height="22" Click="AddGesture_Click" />
         <Button x:Name="CleanGestures" Content="Clean" HorizontalAlignment="Left" Margin="438,72,0,0" VerticalAlignment="Top" Width="43" Height="22" Click="CleanGestures_Click" />
-        <StackPanel x:Name="GesturesPanel" HorizontalAlignment="Left" Height="257" Margin="249,102,0,0" VerticalAlignment="Top" Width="252" />
+        <StackPanel x:Name="GesturesPanel" HorizontalAlignment="Left" Height="400" Margin="249,102,0,0" VerticalAlignment="Top" Width="252" />
         <Separator HorizontalAlignment="Left" Height="5" Margin="256,45,0,0" VerticalAlignment="Top" Width="225" />
         <TextBlock x:Name="NewPoseText" HorizontalAlignment="Left" Margin="256,51,0,0" TextWrapping="Wrap" Text="Add new Pose:" VerticalAlignment="Top" />
         <Separator HorizontalAlignment="Left" Height="4" Margin="585,370,0,0" VerticalAlignment="Top" Width="64" RenderTransformOrigin="0.5,0.5">
