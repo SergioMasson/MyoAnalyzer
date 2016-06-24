@@ -27,6 +27,7 @@ namespace MyoAnalyzer
             {Gestures.Close, "Close"},
             {Gestures.Rock, "Rock`n Roll"},
             {Gestures.Like, "Like"},
+            {Gestures.Pinch, "Pinch"},
             {Gestures.One, "One" }
         };
     }

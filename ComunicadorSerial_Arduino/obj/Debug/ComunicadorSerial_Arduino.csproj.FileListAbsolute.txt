@@ -55,3 +55,4 @@ C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduin
 C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csproj.GenerateResource.Cache
 C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
 C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csprojResolveAssemblyReference.cache

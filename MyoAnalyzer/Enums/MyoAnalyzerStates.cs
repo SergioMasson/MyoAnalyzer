@@ -16,6 +16,7 @@
         Rock = 3,
         Like = 4,
         One = 5,
+        Pinch = 6,
         None = 0
     }
 

@@ -52,6 +52,7 @@ namespace MyoAnalyzer
             GesturesComboBox.Items.Add("Rock`n Roll");
             GesturesComboBox.Items.Add("Like");
             GesturesComboBox.Items.Add("One");
+            GesturesComboBox.Items.Add("Pinch");
             GesturesComboBox.SelectedIndex = 0;
 
             Channel1CheckBox.DataContext = this;
