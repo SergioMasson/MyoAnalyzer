@@ -47,3 +47,11 @@ C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csproj.GenerateResource.Cache
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
 C:\Users\masso\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe.config
+C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.USBConnectInterface.resources
+C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.Properties.Resources.resources
+C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csproj.GenerateResource.Cache
+C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb

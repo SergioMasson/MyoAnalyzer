@@ -63,7 +63,7 @@
             </Grid>
             <TextBlock Grid.Row="4" x:Name="TrainMethodText" HorizontalAlignment="Left" Margin="0,10,10,10" TextWrapping="Wrap" Text="Select Train Method" VerticalAlignment="Top" FontWeight="Bold"/>
             <ComboBox Grid.Row="5" x:Name="TrainMethod" HorizontalAlignment="Left" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Top" Width="215">
-                <ComboBoxItem IsSelected="True" Content="K Nearest Neighbors"/>
+                <ComboBoxItem IsSelected="True" Content="Default"/>
                 <ComboBoxItem Content="Load Algoithm from MATLAB" />
             </ComboBox>
             <Grid Grid.Row="6">

@@ -25,8 +25,6 @@ namespace MyoAnalyzer
         private readonly IHub _hub;
         private DateTime StartTime;
 
-        private bool _FailToLoad = false;
-
         private AppState State;
         private StreamStatus _streamStatus;
 
@@ -87,8 +85,6 @@ namespace MyoAnalyzer
             {
                 ErroMassege noMyoMassege = new ErroMassege("Myo Connect not found");
                 noMyoMassege.Show();
-                _FailToLoad = true;
-                this.Close();
                 return;
             }
 
@@ -99,19 +95,11 @@ namespace MyoAnalyzer
 
         private void OnLoad(object sender, RoutedEventArgs e)
         {
-            if (_FailToLoad)
-                return;
-
             _channel.StartListening();
         }
 
         private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_FailToLoad)
-            {
-                return;
-            }
-
             _channel.Dispose();
             _hub.Dispose();
         }

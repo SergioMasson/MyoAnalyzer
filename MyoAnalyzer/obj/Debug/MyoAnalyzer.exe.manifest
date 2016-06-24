@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="MyoAnalyzer.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="MyoAnalyzer.exe" version="1.0.0.4" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="myo_icon_blue_dot.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
     <assemblyIdentity name="MyoAnalyzer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -9,22 +10,22 @@
   <trustInfo>
     <security>
       <applicationRequestMinimum>
-        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
         <defaultAssemblyRequest permissionSetReference="Custom" />
       </applicationRequestMinimum>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
-        <!--
-          UAC Manifest Options
-          If you want to change the Windows User Account Control level replace the 
-          requestedExecutionLevel node with one of the following.
+        <!-- UAC Manifest Options
+             If you want to change the Windows User Account Control level replace the 
+             requestedExecutionLevel node with one of the following.
 
         <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
         <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
         <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
 
-         If you want to utilize File and Registry Virtualization for backward 
-         compatibility then delete the requestedExecutionLevel node.
-    -->
+            Specifying requestedExecutionLevel element will disable file and registry virtualization. 
+            Remove this element if your application requires this virtualization for backwards
+            compatibility.
+        -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
     </security>
@@ -133,7 +134,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>VvK7/cniUz4ObapFz8Uuz6/3xSiVOkIk9EYn48eu+os=</dsig:DigestValue>
+        <dsig:DigestValue>jdz1vP2Gwnr8JNyUaYKd1iOSVtbQKHFS0Nr3iPbmgok=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -157,43 +158,31 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>l5pO9h8Akk0syMfi2Y/P7O/Yl6X7BWbPQdB/vOC4Pxs=</dsig:DigestValue>
+        <dsig:DigestValue>36Q3eGdUUjvCCU9L9tW7VikQcqJ6vqkT7TCusEjxbck=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Contracts.dll" size="16896">
-      <assemblyIdentity name="Microsoft.Contracts" version="1.0.0.0" publicKeyToken="736440C9B414EA16" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>nCO5dWN026cVDs9psqDWyk4tBjl0Aw7mR3uk/HLdhQw=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="175072">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="387072">
       <assemblyIdentity name="MyoAnalyzer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>GyLNxNFSkumN4nuZ0fIXwh0f58/jvrZimg13httSUro=</dsig:DigestValue>
+        <dsig:DigestValue>BpvU73cc44XNZdUKJLgUFyTkp3wiLbjCgz/J4EstOgY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoSharp.dll" size="85504">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoSharp.dll" size="86016">
       <assemblyIdentity name="MyoSharp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hs3nHeyEXtgFKuYSy5GjFTD7Xqsf5Gv/638SdbxbKk4=</dsig:DigestValue>
+        <dsig:DigestValue>ye1e971S2v1yWnCoZyz84mhxDdv5S//iHXue4UIwK9s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -374,6 +363,15 @@
       <dsig:DigestValue>DYCSPDtSE777upJkOXpsp4P4vvEGS9BnxdskgtkRlJU=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="myo_icon_blue_dot.ico" size="99678">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ZaUvDvAdauu+JCIURVphDtwMP0dOutt5PEt3umatPmM=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="MyoAnalyzer.exe.config" size="539">
     <hash>
       <dsig:Transforms>
@@ -383,4 +381,21 @@
       <dsig:DigestValue>22KTyxEGTueRL02dh4FH/voMvALuvLR2opZwN7XZ3fs=</dsig:DigestValue>
     </hash>
   </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- A list of the Windows versions that this application has been tested on and is
+           is designed to work with. Uncomment the appropriate elements and Windows will 
+           automatically selected the most compatible environment. -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
 </asmv1:assembly>
