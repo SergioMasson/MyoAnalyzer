@@ -33,3 +33,10 @@ C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoSharp\obj\Debug\Decl\
 C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoSharp\obj\Debug\Decl\MyoSharp.pdb
 C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoSharp\obj\Debug\CodeContractAnalysisRun.log
 C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoSharp\obj\Debug\MyoSharp.csprojResolveAssemblyReference.cache
+C:\Users\masso\Documents\GitHub\LINKED\MyoSharp\bin\Debug\x64\myo.dll
+C:\Users\masso\Documents\GitHub\LINKED\MyoSharp\bin\Debug\x86\myo.dll
+C:\Users\masso\Documents\GitHub\LINKED\MyoSharp\bin\Debug\MyoSharp.dll
+C:\Users\masso\Documents\GitHub\LINKED\MyoSharp\bin\Debug\MyoSharp.pdb
+C:\Users\masso\Documents\GitHub\LINKED\MyoSharp\obj\Debug\MyoSharp.csprojResolveAssemblyReference.cache
+C:\Users\masso\Documents\GitHub\LINKED\MyoSharp\obj\Debug\MyoSharp.dll
+C:\Users\masso\Documents\GitHub\LINKED\MyoSharp\obj\Debug\MyoSharp.pdb

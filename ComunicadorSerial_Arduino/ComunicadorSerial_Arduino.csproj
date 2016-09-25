@@ -36,10 +36,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>58014A47A6A916404FFE94F83F6E015869D795B3</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>4FB20CBD04425419FF0C6BEB8FE1EC95AE27C43E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ComunicadorSerial_Arduino_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -99,10 +99,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>41C4F1D2961B18A9497D340052061687F5EC6A1A</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>4FB20CBD04425419FF0C6BEB8FE1EC95AE27C43E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>MyoAnalyzer_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -283,7 +284,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="MyoAnalyzer_1_TemporaryKey.pfx" />
+    <None Include="MyoAnalyzer_2_TemporaryKey.pfx" />
     <None Include="MyoAnalyzer_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\obj\Debug\
+C:\Users\masso\Documents\GitHub\LINKED\MyoAnalyzer\obj\Debug\
 MyoAnalyzer
 none
 false
-CONTRACTS_FULL;CODE_ANALYSIS;DEBUG;TRACE
-C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\MyoAnalyzer\App.xaml
+DEBUG;TRACE
+C:\Users\masso\Documents\GitHub\LINKED\MyoAnalyzer\App.xaml
 81646583510
-1-276465676
-341620614357
-33-152444909
+1731011770
+34-742940098
+33235697971
 XAML_blocks\AttributeRankWindow.xaml;XAML_blocks\AttributeRankWindowPrefabs\AttributeRankItem.xaml;XAML_blocks\ClassificationTestWindow.xaml;XAML_blocks\ErroMassege.xaml;XAML_blocks\GesturePanel.xaml;MainWindow.xaml;XAML_blocks\ResultWindow.xaml;XAML_blocks\TrainAndTestInputWindow.xaml;
 
 True

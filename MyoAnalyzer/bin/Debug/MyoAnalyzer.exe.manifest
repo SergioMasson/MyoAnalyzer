@@ -134,7 +134,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NX17LTDvAFhr80cQOf2uylV1qCyL6LYEMPm0pEiZjZM=</dsig:DigestValue>
+        <dsig:DigestValue>Mgvq+lRTziO8bQSo40mrDH9KULDCWLcGmtdEXc5xe2s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -158,31 +158,31 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>GbSinmLJyCczjbJP5pvPMqF+cIJcI3EUzVSQ69cmnVw=</dsig:DigestValue>
+        <dsig:DigestValue>EHOroq67wMEiuNFtdXProFBoXCiKhz5K8sVM0hg5oOo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="387072">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoAnalyzer.exe" size="375264">
       <assemblyIdentity name="MyoAnalyzer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>pP5eruKocIcgLKMeZVK0+c5NPI8movzDCaa5gP5MfCk=</dsig:DigestValue>
+        <dsig:DigestValue>zaJSOSNbN7KY2TzCzA1sUypln9zFfHfdBdMU147KlhY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoSharp.dll" size="86016">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyoSharp.dll" size="62976">
       <assemblyIdentity name="MyoSharp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>XOajMtAvIfrHnfK/9HiZChXIg0xE/uec0vx2NFD2cDk=</dsig:DigestValue>
+        <dsig:DigestValue>qM/msxcEyJRIWThACYMUrx7+rgVrhUBWObo9xS4Sc74=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

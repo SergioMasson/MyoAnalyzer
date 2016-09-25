@@ -56,3 +56,12 @@ C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduin
 C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
 C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
 C:\Users\sergio-ROG\OneDrive\LINKED\MyoAnalyzer_Desktop\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csprojResolveAssemblyReference.cache
+C:\Users\masso\Documents\GitHub\LINKED\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csprojResolveAssemblyReference.cache
+C:\Users\masso\Documents\GitHub\LINKED\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.USBConnectInterface.resources
+C:\Users\masso\Documents\GitHub\LINKED\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.Properties.Resources.resources
+C:\Users\masso\Documents\GitHub\LINKED\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.csproj.GenerateResource.Cache
+C:\Users\masso\Documents\GitHub\LINKED\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\masso\Documents\GitHub\LINKED\ComunicadorSerial_Arduino\obj\Debug\ComunicadorSerial_Arduino.pdb
+C:\Users\masso\Documents\GitHub\LINKED\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe.config
+C:\Users\masso\Documents\GitHub\LINKED\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.exe
+C:\Users\masso\Documents\GitHub\LINKED\ComunicadorSerial_Arduino\bin\Debug\ComunicadorSerial_Arduino.pdb
