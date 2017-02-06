@@ -349,3 +349,7 @@ C:\Users\masso\Documents\GitHub\LINKED\MyoAnalyzer\obj\Debug\MyoAnalyzer.csproj.
 C:\Users\masso\Documents\GitHub\LINKED\MyoAnalyzer\obj\Debug\MyoAnalyzer.TrustInfo.xml
 C:\Users\masso\Documents\GitHub\LINKED\MyoAnalyzer\obj\Debug\MyoAnalyzer.exe.manifest
 C:\Users\masso\Documents\GitHub\LINKED\MyoAnalyzer\obj\Debug\MyoAnalyzer.application
+C:\Users\SergioMasson-ROG\Documents\GitHub\LINKED\MyoAnalyzer\bin\Debug\MyoAnalyzer.exe.config
+C:\Users\SergioMasson-ROG\Documents\GitHub\LINKED\MyoAnalyzer\obj\Debug\MyoAnalyzer.csproj.ResolveComReference.cache
+C:\Users\SergioMasson-ROG\Documents\GitHub\LINKED\MyoAnalyzer\obj\Debug\MyoAnalyzer.exe
+C:\Users\SergioMasson-ROG\Documents\GitHub\LINKED\MyoAnalyzer\obj\Debug\MyoAnalyzer.pdb
