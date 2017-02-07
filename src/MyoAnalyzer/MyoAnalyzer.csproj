@@ -29,10 +29,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://github.com/SergioMasson/LINKED/tree/master/src/MyoSharp/</InstallUrl>
+    <InstallUrl>https://github.com/SergioMasson/LINKED/tree/master/installer/</InstallUrl>
     <ProductName>Myo Analyzer</ProductName>
     <PublisherName>Linked Bionics</PublisherName>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
