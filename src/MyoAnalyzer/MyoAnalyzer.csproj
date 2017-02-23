@@ -309,9 +309,9 @@
       <Project>{3a8ff3e3-989f-45cb-b287-508409163a19}</Project>
       <Name>DynamicPlotWPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyoSharp\MyoSharp.csproj">
-      <Project>{b075c7e9-fe48-4508-b44c-1a259bcc8b22}</Project>
-      <Name>MyoSharp</Name>
+    <ProjectReference Include="..\git.jedinja.monomyo\git.jedinja.monomyo.csproj">
+      <Project>{6889041d-d7d0-41c7-b450-2b6d6417d903}</Project>
+      <Name>git.jedinja.monomyo</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

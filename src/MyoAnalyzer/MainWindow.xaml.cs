@@ -1,11 +1,11 @@
 ﻿using ComunicadorSerial_Arduino;
 using DynamicPlotWPF;
+using git.jedinja.monomyo.SDK;
+using git.jedinja.monomyo.SDK.Notifications;
 using MyoAnalyzer.Classification;
 using MyoAnalyzer.DataTypes;
 using MyoAnalyzer.Enums;
 using MyoAnalyzer.XAML_blocks;
-using MyoSharp.Communication;
-using MyoSharp.Device;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,13 +16,13 @@ using System.Windows.Controls;
 
 namespace MyoAnalyzer
 {
-  
-
     public partial class MainWindow
     {
         private const int NUMBER_OF_SENSORS = 8;
-        private readonly IChannel _channel;
-        private readonly IHub _hub;
+
+        private static Myo _myo;
+        private static MyoController _contr;
+
         private DateTime StartTime;
 
         private bool _FailToLoad = false;
@@ -32,11 +32,11 @@ namespace MyoAnalyzer
 
         private List<string> EmgDataToSave;
         private List<double[]> _dataColected;
-      
+
         private double[][] DataTraining;
-       
+
         private ITrainner Trainner;
-     
+
         private USBConnectInterface _connectClick;
 
         public bool[] ChannalsToTrain { get; set; }
@@ -45,7 +45,7 @@ namespace MyoAnalyzer
         {
             InitializeComponent();
 
-            _connectClick = new USBConnectInterface();           
+            _connectClick = new USBConnectInterface();
 
             GesturesComboBox.Items.Add("Open");
             GesturesComboBox.Items.Add("Close");
@@ -80,22 +80,22 @@ namespace MyoAnalyzer
 
             // get set up to listen for Myo events
 
-            try
-            {
-                _channel = Channel.Create(ChannelDriver.Create(ChannelBridge.Create()));
-            }
-            catch (Exception e)
-            {
-                ErroMassege noMyoMassege = new ErroMassege("Myo Connect not found");
-                noMyoMassege.Show();
-                _FailToLoad = true;
-                this.Close();
-                return;
-            }
+            //try
+            //{
+            //    _channel = Channel.Create(ChannelDriver.Create(ChannelBridge.Create()));
+            //}
+            //catch (Exception e)
+            //{
+            //    ErroMassege noMyoMassege = new ErroMassege("Myo Connect not found");
+            //    noMyoMassege.Show();
+            //    _FailToLoad = true;
+            //    this.Close();
+            //    return;
+            //}
 
-            _hub = Hub.Create(_channel);
-            _hub.MyoConnected += Hub_MyoConnected;
-            _hub.MyoDisconnected += Hub_MyoDisconnected;
+            //_hub = Hub.Create(_channel);
+            //_hub.MyoConnected += Hub_MyoConnected;
+            //_hub.MyoDisconnected += Hub_MyoDisconnected;
         }
 
         private void OnLoad(object sender, RoutedEventArgs e)
@@ -103,7 +103,7 @@ namespace MyoAnalyzer
             if (_FailToLoad)
                 return;
 
-            _channel.StartListening();
+            Connect();
         }
 
         private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
@@ -115,6 +115,44 @@ namespace MyoAnalyzer
 
             _channel.Dispose();
             _hub.Dispose();
+        }
+
+        public void Connect()
+        {
+            _myo = Myo.ConnectEasyPreConfigured("/dev/ttyACM0", NotificationAutoConfigurableValues.All);
+            _contr = _myo.Controller;
+            _myo.Notifications.EmgDataReceived += Notifications_EmgDataReceived;
+        }
+
+        private void Notifications_EmgDataReceived(object sender, EmgDataReceivedEventArgs e)
+        {
+            if (State != AppState.Acquiring)
+            {
+                return;
+            }
+
+            string data = "";
+
+            double[] datasColected = new double[9];
+
+            // pull _dataColected from each sensor
+            for (var i = 0; i < NUMBER_OF_SENSORS; ++i)
+            {
+                datasColected[i] = e.Data[i];
+                data = data + e.Data[i] + " \t ";
+            }
+
+            datasColected[8] = (e.Timestamp - StartTime).TotalMilliseconds;
+
+            //TODO: Fazer interpolação
+            if (_dataColected.Count > 2)
+            {
+                if (_dataColected?.Last()?[8] == datasColected[8])
+                    return;
+            }
+
+            _dataColected.Add(datasColected);
+            EmgDataToSave.Add(data + (int)(e.Timestamp - StartTime).TotalMilliseconds);
         }
 
         #region Myo EventHandlers
@@ -133,33 +171,6 @@ namespace MyoAnalyzer
 
         private void Myo_EmgDataAcquired(object sender, EmgDataEventArgs e)
         {
-            if (State != AppState.Acquiring)
-            {
-                return;
-            }
-
-            string data = "";
-
-            double[] datasColected = new double[9];
-
-            // pull _dataColected from each sensor
-            for (var i = 0; i < NUMBER_OF_SENSORS; ++i)
-            {
-                datasColected[i] = e.EmgData.GetDataForSensor(i);
-                data = data + e.EmgData.GetDataForSensor(i) + " \t ";
-            }
-
-            datasColected[8] = (e.Timestamp - StartTime).TotalMilliseconds;
-
-            //TODO: Fazer interpolação
-            if (_dataColected.Count > 2)
-            {
-                if (_dataColected?.Last()?[8] == datasColected[8])
-                    return;
-            }
-
-            _dataColected.Add(datasColected);
-            EmgDataToSave.Add(data + (int)(e.Timestamp - StartTime).TotalMilliseconds);
         }
 
         #endregion Myo EventHandlers
@@ -321,7 +332,7 @@ namespace MyoAnalyzer
         }
 
         private void RankAttributes_Click(object sender, RoutedEventArgs e)
-        {            
+        {
             List<Pose> posesToRankAttributes = (from XAML_blocks.GesturePanel pose in GesturesPanel.Children select pose.Pose).ToList();
 
             if (!posesToRankAttributes.Any(a => a.TotalPoseData.Any()))
@@ -336,7 +347,7 @@ namespace MyoAnalyzer
         }
 
         private void AddGesture_Click(object sender, RoutedEventArgs e)
-        {         
+        {
             XAML_blocks.GesturePanel newGesture = new XAML_blocks.GesturePanel(GesturesComboBox.Items[GesturesComboBox.SelectedIndex].ToString());
 
             GesturesPanel.Children.Add(newGesture);
@@ -354,8 +365,7 @@ namespace MyoAnalyzer
         }
 
         private void StarLiveDataStreaming_Click(object sender, RoutedEventArgs e)
-        {          
-
+        {
         }
 
         private async void TrainAndTest_Click(object sender, RoutedEventArgs e)
@@ -383,7 +393,7 @@ namespace MyoAnalyzer
         private async void LiveStreaming_Click(object sender, RoutedEventArgs e)
         {
             if (_streamStatus != StreamStatus.Streaming)
-            {                
+            {
                 StopLive.Visibility = Visibility.Visible;
                 LiveButton.Visibility = Visibility.Hidden;
 
@@ -398,8 +408,7 @@ namespace MyoAnalyzer
                 DisplayText.Text = string.Empty;
 
                 DisplayText.AppendText("You just stoped Streaming");
-
-            }          
+            }
         }
 
         private void StopLive_Click(object sender, RoutedEventArgs e)
@@ -408,7 +417,7 @@ namespace MyoAnalyzer
             {
                 _streamStatus = StreamStatus.Awayting;
                 StopLive.Visibility = Visibility.Hidden;
-                LiveButton.Visibility = Visibility.Visible;               
+                LiveButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -430,11 +439,10 @@ namespace MyoAnalyzer
 
             while (_dataColected.Count <= WindowSize)
             {
-                
             }
 
             return _dataColected;
-        }       
+        }
 
         private async Task AwaitForTreamingToStop()
         {
@@ -464,6 +472,6 @@ namespace MyoAnalyzer
                 }
             }
             _connectClick?.Close();
-        }      
+        }
     }
 }
